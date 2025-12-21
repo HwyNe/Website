@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PitoCtf Writeups</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+        /* GENEL */
+        
+        body {
+            font-family: Inter, system-ui, sans-serif;
+            background: #f6f1e7;
+            /* KREM ARKA PLAN */
+            color: #2e2a25;
+            min-height: 100vh;
+        }
+        /* HEADER */
+        
+        .header {
+            background: #fbf7f0;
+            border-bottom: 1px solid #e5dccb;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 1.4rem;
+            color: #7c5c3e;
+        }
+        
+        .logo p {
+            font-size: .8rem;
+            color: #8b7a63;
+        }
+        
+        .header-buttons {
+            display: flex;
+            gap: .75rem
+        }
+        
+        .btn {
+            padding: .45rem .9rem;
+            border-radius: 8px;
+            border: 1px solid #e5dccb;
+            background: #fffaf3;
+            color: #2e2a25;
+            text-decoration: none;
+            font-size: .9rem;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: #f0e6d8
+        }
+        /* CONTAINER */
+        
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 2rem;
+        }
+        /* SEARCH */
+        
+        .search-box input {
+            width: 100%;
+            padding: .75rem 1rem;
+            background: #fffaf3;
+            border: 1px solid #e5dccb;
+            border-radius: 10px;
+            color: #2e2a25;
+        }
+        
+        .search-box input::placeholder {
+            color: #9a8a73
+        }
+        /* FILTER */
+        
+        .filter-buttons {
+            margin-top: 1rem;
+            display: flex;
+            gap: .5rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: #fffaf3;
+            border: 1px solid #e5dccb;
+            border-radius: 999px;
+            padding: .4rem .9rem;
+            color: #7a6a55;
+            font-size: .8rem;
+            cursor: pointer;
+        }
+        
+        .filter-btn.active {
+            background: #7c5c3e;
+            color: #fffaf3;
+            border-color: #7c5c3e;
+        }
+        /* STATS */
+        
+        .stats {
+            margin: 2rem 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+        
+        .stat-card {
+            background: #fffaf3;
+            border: 1px solid #e5dccb;
+            border-radius: 16px;
+            padding: 1.25rem;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #7c5c3e;
+        }
+        
+        .stat-label {
+            color: #8b7a63;
+            font-size: .85rem
+        }
+        /* WRITEUPS */
+        
+        .writeups-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+        
+        .writeup-card {
+            background: #fffaf3;
+            border: 1px solid #e5dccb;
+            border-radius: 16px;
+            padding: 1.25rem;
+            cursor: pointer;
+            transition: .2s;
+        }
+        
+        .writeup-card:hover {
+            transform: translateY(-4px);
+            border-color: #7c5c3e;
+        }
+        
+        .category-badge {
+            display: inline-block;
+            font-size: .7rem;
+            padding: .2rem .6rem;
+            border-radius: 999px;
+            background: #efe4d3;
+            color: #7c5c3e;
+            margin-bottom: .5rem;
+        }
+        
+        .writeup-title {
+            font-size: 1.1rem;
+            margin: .4rem 0;
+        }
+        
+        .writeup-preview {
+            font-size: .85rem;
+            color: #6f6250;
+        }
+        /* DETAIL */
+        
+        .detail-view {
+            display: none;
+            max-width: 900px;
+            margin: auto
+        }
+        
+        .detail-view.active {
+            display: block
+        }
+        
+        .back-btn {
+            background: none;
+            border: none;
+            color: #7c5c3e;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+        
+        .detail-article {
+            background: #fffaf3;
+            border: 1px solid #e5dccb;
+            border-radius: 16px;
+            padding: 2rem;
+        }
+        
+        .detail-content code {
+            display: block;
+            background: #f6f1e7;
+            border: 1px solid #e5dccb;
+            border-radius: 10px;
+            padding: 1rem;
+            color: #3b3b3b;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        /* FOOTER */
+        
+        .footer {
+            margin-top: 4rem;
+            border-top: 1px solid #e5dccb;
+            padding: 2rem;
+            text-align: center;
+            color: #8b7a63;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <h1>PitoCtf Writeups</h1>
+                <p>Siber Güvenlik Çözüm Notları</p>
+            </div>
+            <div class="header-buttons">
+                <button class="btn" id="homeBtn">Ana Sayfa</button>
+                <a class="btn" target="_blank" href="https://github.com/HwyNe/PitoCtf-Writeups">GitHub</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div id="mainView">
+            <div class="search-box">
+                <input id="searchInput" placeholder="Writeup ara...">
+            </div>
+
+            <div class="filter-buttons" id="filterButtons"></div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalWriteups">0</div>
+                    <div class="stat-label">Toplam Writeup</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalCategories">0</div>
+                    <div class="stat-label">Kategori</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="filteredResults">0</div>
+                    <div class="stat-label">Sonuç</div>
+                </div>
+            </div>
+
+            <div class="writeups-grid" id="writeupsGrid"></div>
+        </div>
+
+        <div id="detailView" class="detail-view">
+            <button class="back-btn" id="backBtn">← Geri</button>
+            <article class="detail-article">
+                <span class="category-badge" id="detailCategory"></span>
+                <h1 id="detailTitle"></h1>
+                <p id="detailDate"></p>
+                <a id="detailGithubLink" target="_blank">GitHub’da Gör</a>
+                <div class="detail-content" id="detailContent"></div>
+            </article>
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        PitoCtf Writeups • Krem tema
+    </footer>
+
+    <script>
+        let allWriteups = [];
+        let currentFilter = "all";
+        let searchTerm = "";
+
+        async function fetchWriteups() {
+            const categories = ["Reverse", "web"];
+            for (const c of categories) {
+                const r = await fetch(`https://api.github.com/repos/HwyNe/PitoCtf-Writeups/contents/${c}`);
+                if (!r.ok) continue;
+                const files = await r.json();
+                for (const f of files) {
+                    if (!f.name.endsWith(".md")) continue;
+                    const txt = await fetch(f.download_url).then(r => r.text());
+                    allWriteups.push({
+                        name: f.name.replace(".md", ""),
+                        category: c,
+                        content: txt,
+                        url: f.html_url,
+                        date: new Date().toLocaleDateString("tr-TR")
+                    });
+                }
+            }
+            updateStats();
+            renderFilters();
+            renderWriteups();
+        }
+
+        function updateStats() {
+            totalWriteups.textContent = allWriteups.length;
+            totalCategories.textContent = [...new Set(allWriteups.map(w => w.category))].length;
+        }
+
+        function getFiltered() {
+            return allWriteups.filter(w =>
+                (currentFilter === "all" || w.category === currentFilter) &&
+                (w.name.toLowerCase().includes(searchTerm) ||
+                    w.content.toLowerCase().includes(searchTerm))
+            );
+        }
+
+        function renderFilters() {
+            filterButtons.innerHTML = "";
+            ["all", ...new Set(allWriteups.map(w => w.category))].forEach(c => {
+                const b = document.createElement("button");
+                b.className = "filter-btn" + (currentFilter === c ? " active" : "");
+                b.textContent = c === "all" ? "Tümü" : c;
+                b.onclick = () => {
+                    currentFilter = c;
+                    renderFilters();
+                    renderWriteups()
+                };
+                filterButtons.appendChild(b);
+            });
+        }
+
+        function renderWriteups() {
+            const list = getFiltered();
+            filteredResults.textContent = list.length;
+            writeupsGrid.innerHTML = "";
+            list.forEach(w => {
+                const d = document.createElement("div");
+                d.className = "writeup-card";
+                d.innerHTML = `
+            <span class="category-badge">${w.category}</span>
+            <div class="writeup-title">${w.name}</div>
+            <div class="writeup-preview">${w.content.slice(0,100)}...</div>
+        `;
+                d.onclick = () => showDetail(w);
+                writeupsGrid.appendChild(d);
+            });
+        }
+
+        function showDetail(w) {
+            mainView.style.display = "none";
+            detailView.classList.add("active");
+            detailTitle.textContent = w.name;
+            detailCategory.textContent = w.category;
+            detailDate.textContent = w.date;
+            detailGithubLink.href = w.url;
+            detailContent.innerHTML = "<pre><code>" + w.content.replace(/</g, "&lt;") + "</code></pre>";
+        }
+
+        backBtn.onclick = () => {
+            detailView.classList.remove("active");
+            mainView.style.display = "block";
+        };
+
+        searchInput.oninput = e => {
+            searchTerm = e.target.value.toLowerCase();
+            renderWriteups();
+        };
+
+        homeBtn.onclick = () => location.reload();
+
+        fetchWriteups();
+    </script>
+
+</body>
+
+</html>

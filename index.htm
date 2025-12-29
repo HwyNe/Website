@@ -3,32 +3,48 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>PitoCtf Writeups</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammed Emin Karkın - Bug Bounty & Pentesting</title>
+    <meta name="description" content="Web güvenliği, bug bounty ve penetrasyon testi writeup'ları">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
 
     <style>
         * {
             margin: 0;
             padding: 0;
-            box-sizing: border-box
+            box-sizing: border-box;
         }
         
         body {
-            font-family: Inter, system-ui, sans-serif;
-            background: #f6f1e7;
-            color: #2e2a25;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f9f6f1;
+            color: #2c2419;
+            line-height: 1.6;
         }
         
         .header {
-            background: #fbf7f0;
-            border-bottom: 1px solid #e5dccb;
-            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #fdfbf7 0%, #f5f0e8 100%);
+            border-bottom: 1px solid #e8dcc8;
+            padding: 1.2rem 2rem;
             position: sticky;
             top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         }
         
         .header-content {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: auto;
             display: flex;
             justify-content: space-between;
@@ -36,103 +52,239 @@
         }
         
         .logo h1 {
-            color: #7c5c3e
+            color: #6b4e3d;
+            font-size: 1.5rem;
+            font-weight: 700;
         }
         
         .logo p {
-            font-size: .8rem;
-            color: #8b7a63
+            font-size: 0.85rem;
+            color: #8f7a63;
+            margin-top: 0.2rem;
         }
         
-        .btn {
-            padding: .45rem .9rem;
-            border-radius: 8px;
-            border: 1px solid #e5dccb;
-            background: #fffaf3;
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: #2c2419;
             text-decoration: none;
-            color: #2e2a25;
-            cursor: pointer;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: #6b4e3d;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #fdfbf7 0%, #f5f0e8 100%);
+            padding: 5rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #e8dcc8;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            color: #6b4e3d;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+        
+        .hero .title {
+            font-size: 1.4rem;
+            color: #8f7a63;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        
+        .hero .bio {
+            font-size: 1.1rem;
+            color: #5a4a3a;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .social-btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #e8dcc8;
+            background: #fffcf7;
+            text-decoration: none;
+            color: #2c2419;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .social-btn:hover {
+            background: #6b4e3d;
+            color: #fffcf7;
+            border-color: #6b4e3d;
+            transform: translateY(-2px);
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: auto;
+            padding: 3rem 2rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            color: #6b4e3d;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .stat-card {
+            background: #fffcf7;
+            border: 1px solid #e8dcc8;
+            border-radius: 16px;
             padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(107, 78, 61, 0.08);
+        }
+        
+        .stat-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #6b4e3d;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: #8f7a63;
+            font-weight: 500;
+        }
+        
+        .search-filter-section {
+            margin-bottom: 3rem;
+        }
+        
+        .search-box {
+            margin-bottom: 1.5rem;
         }
         
         .search-box input {
             width: 100%;
-            padding: .75rem;
-            border-radius: 10px;
-            border: 1px solid #e5dccb;
-            background: #fffaf3;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #e8dcc8;
+            background: #fffcf7;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: #6b4e3d;
         }
         
         .filter-buttons {
-            margin-top: 1rem;
             display: flex;
-            gap: .5rem;
+            gap: 0.75rem;
             flex-wrap: wrap;
+            justify-content: center;
         }
         
         .filter-btn {
-            padding: .4rem .9rem;
-            border-radius: 999px;
-            border: 1px solid #e5dccb;
-            background: #fffaf3;
+            padding: 0.6rem 1.4rem;
+            border-radius: 24px;
+            border: 1px solid #e8dcc8;
+            background: #fffcf7;
             cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .filter-btn:hover {
+            border-color: #6b4e3d;
         }
         
         .filter-btn.active {
-            background: #7c5c3e;
-            color: #fffaf3;
-        }
-        
-        .stats {
-            margin: 2rem 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1rem;
-        }
-        
-        .stat-card {
-            background: #fffaf3;
-            border: 1px solid #e5dccb;
-            border-radius: 16px;
-            padding: 1.25rem;
-        }
-        
-        .stat-value {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #7c5c3e;
+            background: #6b4e3d;
+            color: #fffcf7;
+            border-color: #6b4e3d;
         }
         
         .writeups-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.25rem;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
         }
         
         .writeup-card {
-            background: #fffaf3;
-            border: 1px solid #e5dccb;
+            background: #fffcf7;
+            border: 1px solid #e8dcc8;
             border-radius: 16px;
-            padding: 1.25rem;
+            padding: 1.8rem;
             cursor: pointer;
+            transition: all 0.3s;
         }
         
         .writeup-card:hover {
-            border-color: #7c5c3e;
-            transform: translateY(-4px);
+            border-color: #6b4e3d;
+            transform: translateY(-6px);
+            box-shadow: 0 12px 32px rgba(107, 78, 61, 0.12);
         }
         
         .category-badge {
-            font-size: .7rem;
-            padding: .2rem .6rem;
-            border-radius: 999px;
-            background: #efe4d3;
-            color: #7c5c3e;
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            background: #f0e6d6;
+            color: #6b4e3d;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .writeup-card h3 {
+            color: #2c2419;
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .writeup-card p {
+            color: #5a4a3a;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
         
         .detail-view {
@@ -143,26 +295,137 @@
             display: block;
         }
         
-        .detail-article {
-            background: #fffaf3;
-            border: 1px solid #e5dccb;
-            border-radius: 16px;
-            padding: 2rem;
+        .back-btn {
+            padding: 0.8rem 1.6rem;
+            border-radius: 12px;
+            border: 1px solid #e8dcc8;
+            background: #fffcf7;
+            cursor: pointer;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            display: inline-block;
+            transition: all 0.2s;
         }
         
-        pre {
-            background: #f6f1e7;
-            padding: 1rem;
-            border-radius: 10px;
+        .back-btn:hover {
+            background: #6b4e3d;
+            color: #fffcf7;
+            border-color: #6b4e3d;
+        }
+        
+        .detail-article {
+            background: #fffcf7;
+            border: 1px solid #e8dcc8;
+            border-radius: 16px;
+            padding: 3rem;
+        }
+        
+        .detail-article h1 {
+            color: #6b4e3d;
+            margin: 1.5rem 0;
+            font-size: 2.2rem;
+        }
+        
+        .detail-article a {
+            color: #6b4e3d;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 1rem 0;
+            display: inline-block;
+        }
+        
+        .detail-article a:hover {
+            text-decoration: underline;
+        }
+        
+        .detail-article pre {
+            background: #f5f0e8;
+            padding: 1.5rem;
+            border-radius: 12px;
             overflow-x: auto;
+            margin-top: 2rem;
+            border: 1px solid #e8dcc8;
+        }
+        
+        .detail-article code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #2c2419;
+        }
+        
+        .about-section {
+            background: #fffcf7;
+            border: 1px solid #e8dcc8;
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: auto;
+        }
+        
+        .about-content h2 {
+            color: #6b4e3d;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .about-content p {
+            color: #5a4a3a;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+        
+        .skills-list {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+        
+        .skill-tag {
+            padding: 0.6rem 1.2rem;
+            background: #f0e6d6;
+            border-radius: 20px;
+            color: #6b4e3d;
+            font-weight: 500;
+            font-size: 0.9rem;
         }
         
         .footer {
-            margin-top: 4rem;
-            padding: 2rem;
+            background: linear-gradient(135deg, #fdfbf7 0%, #f5f0e8 100%);
+            border-top: 1px solid #e8dcc8;
+            padding: 3rem 2rem;
             text-align: center;
-            color: #8b7a63;
-            border-top: 1px solid #e5dccb;
+            color: #8f7a63;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: auto;
+        }
+        
+        .footer p {
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero .title {
+                font-size: 1.1rem;
+            }
+            .nav-links {
+                gap: 1rem;
+            }
+            .writeups-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -172,54 +435,126 @@
     <header class="header">
         <div class="header-content">
             <div class="logo">
-                <h1>PitoCtf Writeups</h1>
-                <p>Siber Güvenlik Çözüm Notları</p>
+                <h1>M. Emin Karkın</h1>
+                <p>Bug Bounty & Pentesting</p>
             </div>
-            <a class="btn" target="_blank" href="https://github.com/HwyNe/PitoCtf-Writeups">GitHub</a>
+            <nav class="nav-links">
+                <a href="#writeups">Writeups</a>
+                <a href="#about">Hakkımda</a>
+                <a href="#contact">İletişim</a>
+            </nav>
         </div>
     </header>
 
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Muhammed Emin Karkın</h1>
+            <p class="title">Penetration Tester & Bug Bounty Hunter</p>
+            <p class="bio">
+                Web güvenliği alanında kendimi geliştirmeye odaklanmış bir beyaz şapkalı hacker. Motivasyonum siber güvenlik dünyasında iz bırakmak ve sürekli öğrenmek.
+            </p>
+            <div class="social-links">
+                <a href="https://github.com/HwyNe" target="_blank" class="social-btn">
+                    🔗 GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/muhammed-emin-karkin-0479112a0/" target="_blank" class="social-btn">
+                    💼 LinkedIn
+                </a>
+                <a href="https://www.instagram.com/muhammedeminkarkin/" target="_blank" class="social-btn">
+                    📷 Instagram
+                </a>
+                <a href="mailto:muhammedeminkarkin@gmail.com" class="social-btn">
+                    📧 Email
+                </a>
+            </div>
+        </div>
+    </section>
+
     <div class="container">
-
         <div id="mainView">
-            <div class="search-box">
-                <input id="searchInput" placeholder="Writeup ara...">
-            </div>
+            <section id="writeups">
+                <h2 class="section-title">Writeup İstatistikleri</h2>
 
-            <div class="filter-buttons" id="filterButtons"></div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalWriteups">0</div>
+                        <div class="stat-label">Toplam Writeup</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalCategories">0</div>
+                        <div class="stat-label">Kategori</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="filteredResults">0</div>
+                        <div class="stat-label">Sonuç</div>
+                    </div>
+                </div>
 
-            <div class="stats">
-                <div class="stat-card">
-                    <div class="stat-value" id="totalWriteups">0</div>
-                    <div>Toplam Writeup</div>
+                <div class="search-filter-section">
+                    <div class="search-box">
+                        <input id="searchInput" placeholder="🔍 Writeup ara...">
+                    </div>
+                    <div class="filter-buttons" id="filterButtons"></div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="totalCategories">0</div>
-                    <div>Kategori</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="filteredResults">0</div>
-                    <div>Sonuç</div>
-                </div>
-            </div>
 
-            <div class="writeups-grid" id="writeupsGrid"></div>
+                <div class="writeups-grid" id="writeupsGrid"></div>
+            </section>
+
+            <section id="about" class="about-section">
+                <div class="about-content">
+                    <h2>Hakkımda</h2>
+                    <p>
+                        Merhaba! Ben Muhammed Emin Karkın. Web güvenliği ve penetrasyon testleri alanında kendimi geliştirmeye çalışan bir güvenlik araştırmacısıyım.
+                    </p>
+                    <p>
+                        2025 yılında bu yolculuğa başladım ve hedefim profesyonel bir beyaz şapkalı hacker olmak. HackerOne ve Bugcrowd gibi platformlarda aktif olarak bug bounty çalışmaları yapıyorum.
+                    </p>
+                    <p>
+                        Bu blog, öğrenme sürecimde çözdüğüm CTF challengelarının ve keşfettiğim güvenlik açıklarının writeup'larını paylaşmak amacıyla oluşturuldu.
+                    </p>
+
+                    <h2 style="margin-top: 2rem;">Kullandığım Araçlar</h2>
+                    <div class="skills-list">
+                        <span class="skill-tag">Burp Suite</span>
+                        <span class="skill-tag">Subfinder</span>
+                        <span class="skill-tag">HTTProbe</span>
+                        <span class="skill-tag">SQLMap</span>
+                        <span class="skill-tag">Nmap</span>
+                        <span class="skill-tag">OWASP ZAP</span>
+                        <span class="skill-tag">Metasploit</span>
+                    </div>
+
+                    <h2 style="margin-top: 2rem;">Odaklandığım Alanlar</h2>
+                    <div class="skills-list">
+                        <span class="skill-tag">Web Application Security</span>
+                        <span class="skill-tag">SQL Injection</span>
+                        <span class="skill-tag">XSS</span>
+                        <span class="skill-tag">SSRF</span>
+                        <span class="skill-tag">IDOR</span>
+                        <span class="skill-tag">Authentication Bypass</span>
+                    </div>
+                </div>
+            </section>
         </div>
 
         <div id="detailView" class="detail-view">
-            <button class="btn" onclick="goBack()">← Geri</button>
+            <button class="back-btn" onclick="goBack()">← Geri Dön</button>
             <article class="detail-article">
                 <span class="category-badge" id="detailCategory"></span>
                 <h1 id="detailTitle"></h1>
-                <a id="detailGithub" target="_blank">GitHub’da Gör</a>
+                <a id="detailGithub" target="_blank">GitHub'da Görüntüle →</a>
                 <pre><code id="detailContent"></code></pre>
             </article>
         </div>
-
     </div>
 
-    <footer class="footer">
-        PitoCtf Writeups • Otomatik kategori sistemi
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <p><strong>Muhammed Emin Karkın</strong></p>
+            <p>Penetration Tester & Bug Bounty Hunter</p>
+            <p style="margin-top: 1rem;">muhammedeminkarkin@gmail.com</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">© 2025 Tüm hakları saklıdır.</p>
+        </div>
     </footer>
 
     <script>
@@ -229,31 +564,33 @@
         let searchTerm = "";
 
         async function fetchWriteups() {
-            const root = await fetch(`https://api.github.com/repos/${REPO}/contents`);
-            const items = await root.json();
+            try {
+                const root = await fetch(`https://api.github.com/repos/${REPO}/contents`);
+                const items = await root.json();
+                const folders = items.filter(i => i.type === "dir");
 
-            const folders = items.filter(i => i.type === "dir");
+                for (const folder of folders) {
+                    const res = await fetch(folder.url);
+                    const files = await res.json();
 
-            for (const folder of folders) {
-                const res = await fetch(folder.url);
-                const files = await res.json();
-
-                for (const f of files) {
-                    if (!f.name.endsWith(".md")) continue;
-
-                    const content = await fetch(f.download_url).then(r => r.text());
-                    allWriteups.push({
-                        title: f.name.replace(".md", ""),
-                        category: folder.name,
-                        content,
-                        url: f.html_url
-                    });
+                    for (const f of files) {
+                        if (!f.name.endsWith(".md")) continue;
+                        const content = await fetch(f.download_url).then(r => r.text());
+                        allWriteups.push({
+                            title: f.name.replace(".md", ""),
+                            category: folder.name,
+                            content,
+                            url: f.html_url
+                        });
+                    }
                 }
-            }
 
-            renderFilters();
-            renderWriteups();
-            updateStats();
+                renderFilters();
+                renderWriteups();
+                updateStats();
+            } catch (error) {
+                console.error("Writeup'lar yüklenirken hata:", error);
+            }
         }
 
         function renderFilters() {
@@ -282,14 +619,19 @@
 
             filteredResults.textContent = list.length;
 
+            if (list.length === 0) {
+                writeupsGrid.innerHTML = '<p style="text-align:center;color:#8f7a63;grid-column:1/-1;">Henüz writeup bulunmuyor.</p>';
+                return;
+            }
+
             list.forEach(w => {
                 const d = document.createElement("div");
                 d.className = "writeup-card";
                 d.innerHTML = `
-            <span class="category-badge">${w.category}</span>
-            <h3>${w.title}</h3>
-            <p>${w.content.slice(0,100)}...</p>
-        `;
+                    <span class="category-badge">${w.category}</span>
+                    <h3>${w.title}</h3>
+                    <p>${w.content.slice(0, 120)}...</p>
+                `;
                 d.onclick = () => showDetail(w);
                 writeupsGrid.appendChild(d);
             });
@@ -302,11 +644,13 @@
             detailCategory.textContent = w.category;
             detailGithub.href = w.url;
             detailContent.textContent = w.content;
+            window.scrollTo(0, 0);
         }
 
         function goBack() {
             detailView.classList.remove("active");
             mainView.style.display = "block";
+            window.scrollTo(0, 0);
         }
 
         searchInput.oninput = e => {

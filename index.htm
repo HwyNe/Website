@@ -7,18 +7,6 @@
     <title>Muhammed Emin Karkın - Bug Bounty & Pentesting</title>
     <meta name="description" content="Web güvenliği, bug bounty ve penetrasyon testi writeup'ları">
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'G-XXXXXXXXXX');
-    </script>
-
     <style>
         * {
             margin: 0;
@@ -26,16 +14,45 @@
             box-sizing: border-box;
         }
         
+         :root {
+            --bg-primary: #f9f6f1;
+            --bg-secondary: #fdfbf7;
+            --bg-tertiary: #f5f0e8;
+            --border-color: #e8dcc8;
+            --text-primary: #2c2419;
+            --text-secondary: #5a4a3a;
+            --text-tertiary: #8f7a63;
+            --accent: #6b4e3d;
+            --accent-light: #f0e6d6;
+            --card-bg: #fffcf7;
+            --shadow: rgba(107, 78, 61, 0.08);
+        }
+        
+        body.dark-mode {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #222222;
+            --bg-tertiary: #2a2a2a;
+            --border-color: #3a3a3a;
+            --text-primary: #e8e8e8;
+            --text-secondary: #b8b8b8;
+            --text-tertiary: #888888;
+            --accent: #d4a574;
+            --accent-light: #3a2f24;
+            --card-bg: #262626;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+        
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #f9f6f1;
-            color: #2c2419;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             line-height: 1.6;
+            transition: background 0.3s ease, color 0.3s ease;
         }
         
         .header {
-            background: linear-gradient(135deg, #fdfbf7 0%, #f5f0e8 100%);
-            border-bottom: 1px solid #e8dcc8;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border-bottom: 1px solid var(--border-color);
             padding: 1.2rem 2rem;
             position: sticky;
             top: 0;
@@ -52,14 +69,14 @@
         }
         
         .logo h1 {
-            color: #6b4e3d;
+            color: var(--accent);
             font-size: 1.5rem;
             font-weight: 700;
         }
         
         .logo p {
             font-size: 0.85rem;
-            color: #8f7a63;
+            color: var(--text-tertiary);
             margin-top: 0.2rem;
         }
         
@@ -70,21 +87,44 @@
         }
         
         .nav-links a {
-            color: #2c2419;
+            color: var(--text-primary);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.2s;
         }
         
         .nav-links a:hover {
-            color: #6b4e3d;
+            color: var(--accent);
+        }
+        
+        .theme-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.3rem;
+        }
+        
+        .theme-toggle:hover {
+            background: var(--accent);
+            transform: rotate(20deg) scale(1.1);
+        }
+        
+        .theme-toggle:active {
+            transform: rotate(20deg) scale(0.95);
         }
         
         .hero {
-            background: linear-gradient(135deg, #fdfbf7 0%, #f5f0e8 100%);
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
             padding: 5rem 2rem;
             text-align: center;
-            border-bottom: 1px solid #e8dcc8;
+            border-bottom: 1px solid var(--border-color);
         }
         
         .hero-content {
@@ -94,21 +134,21 @@
         
         .hero h1 {
             font-size: 3rem;
-            color: #6b4e3d;
+            color: var(--accent);
             margin-bottom: 1rem;
             font-weight: 800;
         }
         
         .hero .title {
             font-size: 1.4rem;
-            color: #8f7a63;
+            color: var(--text-tertiary);
             margin-bottom: 1.5rem;
             font-weight: 500;
         }
         
         .hero .bio {
             font-size: 1.1rem;
-            color: #5a4a3a;
+            color: var(--text-secondary);
             margin-bottom: 2rem;
             line-height: 1.8;
         }
@@ -123,10 +163,10 @@
         .social-btn {
             padding: 0.7rem 1.5rem;
             border-radius: 12px;
-            border: 1px solid #e8dcc8;
-            background: #fffcf7;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
             text-decoration: none;
-            color: #2c2419;
+            color: var(--text-primary);
             font-weight: 500;
             transition: all 0.3s;
             display: inline-flex;
@@ -135,9 +175,9 @@
         }
         
         .social-btn:hover {
-            background: #6b4e3d;
-            color: #fffcf7;
-            border-color: #6b4e3d;
+            background: var(--accent);
+            color: var(--card-bg);
+            border-color: var(--accent);
             transform: translateY(-2px);
         }
         
@@ -149,7 +189,7 @@
         
         .section-title {
             font-size: 2rem;
-            color: #6b4e3d;
+            color: var(--accent);
             margin-bottom: 2rem;
             font-weight: 700;
             text-align: center;
@@ -163,8 +203,8 @@
         }
         
         .stat-card {
-            background: #fffcf7;
-            border: 1px solid #e8dcc8;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 2rem;
             text-align: center;
@@ -173,19 +213,19 @@
         
         .stat-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(107, 78, 61, 0.08);
+            box-shadow: 0 8px 24px var(--shadow);
         }
         
         .stat-value {
             font-size: 3rem;
             font-weight: 800;
-            color: #6b4e3d;
+            color: var(--accent);
             margin-bottom: 0.5rem;
         }
         
         .stat-label {
             font-size: 1rem;
-            color: #8f7a63;
+            color: var(--text-tertiary);
             font-weight: 500;
         }
         
@@ -201,15 +241,16 @@
             width: 100%;
             padding: 1rem 1.5rem;
             border-radius: 12px;
-            border: 1px solid #e8dcc8;
-            background: #fffcf7;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-primary);
             font-size: 1rem;
             transition: border-color 0.2s;
         }
         
         .search-box input:focus {
             outline: none;
-            border-color: #6b4e3d;
+            border-color: var(--accent);
         }
         
         .filter-buttons {
@@ -222,21 +263,22 @@
         .filter-btn {
             padding: 0.6rem 1.4rem;
             border-radius: 24px;
-            border: 1px solid #e8dcc8;
-            background: #fffcf7;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-primary);
             cursor: pointer;
             font-weight: 500;
             transition: all 0.2s;
         }
         
         .filter-btn:hover {
-            border-color: #6b4e3d;
+            border-color: var(--accent);
         }
         
         .filter-btn.active {
-            background: #6b4e3d;
-            color: #fffcf7;
-            border-color: #6b4e3d;
+            background: var(--accent);
+            color: var(--card-bg);
+            border-color: var(--accent);
         }
         
         .writeups-grid {
@@ -247,8 +289,8 @@
         }
         
         .writeup-card {
-            background: #fffcf7;
-            border: 1px solid #e8dcc8;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 1.8rem;
             cursor: pointer;
@@ -256,9 +298,9 @@
         }
         
         .writeup-card:hover {
-            border-color: #6b4e3d;
+            border-color: var(--accent);
             transform: translateY(-6px);
-            box-shadow: 0 12px 32px rgba(107, 78, 61, 0.12);
+            box-shadow: 0 12px 32px var(--shadow);
         }
         
         .category-badge {
@@ -266,8 +308,8 @@
             font-size: 0.75rem;
             padding: 0.4rem 0.9rem;
             border-radius: 20px;
-            background: #f0e6d6;
-            color: #6b4e3d;
+            background: var(--accent-light);
+            color: var(--accent);
             font-weight: 600;
             margin-bottom: 1rem;
             text-transform: uppercase;
@@ -275,14 +317,14 @@
         }
         
         .writeup-card h3 {
-            color: #2c2419;
+            color: var(--text-primary);
             margin-bottom: 0.8rem;
             font-size: 1.3rem;
             font-weight: 600;
         }
         
         .writeup-card p {
-            color: #5a4a3a;
+            color: var(--text-secondary);
             font-size: 0.95rem;
             line-height: 1.6;
         }
@@ -298,8 +340,9 @@
         .back-btn {
             padding: 0.8rem 1.6rem;
             border-radius: 12px;
-            border: 1px solid #e8dcc8;
-            background: #fffcf7;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: var(--text-primary);
             cursor: pointer;
             font-weight: 500;
             margin-bottom: 2rem;
@@ -308,26 +351,26 @@
         }
         
         .back-btn:hover {
-            background: #6b4e3d;
-            color: #fffcf7;
-            border-color: #6b4e3d;
+            background: var(--accent);
+            color: var(--card-bg);
+            border-color: var(--accent);
         }
         
         .detail-article {
-            background: #fffcf7;
-            border: 1px solid #e8dcc8;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 3rem;
         }
         
         .detail-article h1 {
-            color: #6b4e3d;
+            color: var(--accent);
             margin: 1.5rem 0;
             font-size: 2.2rem;
         }
         
         .detail-article a {
-            color: #6b4e3d;
+            color: var(--accent);
             text-decoration: none;
             font-weight: 500;
             margin: 1rem 0;
@@ -339,24 +382,24 @@
         }
         
         .detail-article pre {
-            background: #f5f0e8;
+            background: var(--bg-tertiary);
             padding: 1.5rem;
             border-radius: 12px;
             overflow-x: auto;
             margin-top: 2rem;
-            border: 1px solid #e8dcc8;
+            border: 1px solid var(--border-color);
         }
         
         .detail-article code {
             font-family: 'Courier New', monospace;
             font-size: 0.9rem;
             line-height: 1.6;
-            color: #2c2419;
+            color: var(--text-primary);
         }
         
         .about-section {
-            background: #fffcf7;
-            border: 1px solid #e8dcc8;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 3rem;
             margin-bottom: 3rem;
@@ -368,13 +411,13 @@
         }
         
         .about-content h2 {
-            color: #6b4e3d;
+            color: var(--accent);
             margin-bottom: 1.5rem;
             font-size: 1.8rem;
         }
         
         .about-content p {
-            color: #5a4a3a;
+            color: var(--text-secondary);
             margin-bottom: 1rem;
             font-size: 1.05rem;
             line-height: 1.8;
@@ -389,19 +432,19 @@
         
         .skill-tag {
             padding: 0.6rem 1.2rem;
-            background: #f0e6d6;
+            background: var(--accent-light);
             border-radius: 20px;
-            color: #6b4e3d;
+            color: var(--accent);
             font-weight: 500;
             font-size: 0.9rem;
         }
         
         .footer {
-            background: linear-gradient(135deg, #fdfbf7 0%, #f5f0e8 100%);
-            border-top: 1px solid #e8dcc8;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border-top: 1px solid var(--border-color);
             padding: 3rem 2rem;
             text-align: center;
-            color: #8f7a63;
+            color: var(--text-tertiary);
         }
         
         .footer-content {
@@ -442,6 +485,7 @@
                 <a href="#writeups">Writeups</a>
                 <a href="#about">Hakkımda</a>
                 <a href="#contact">İletişim</a>
+                <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</button>
             </nav>
         </div>
     </header>
@@ -563,6 +607,31 @@
         let currentFilter = "all";
         let searchTerm = "";
 
+        function toggleTheme() {
+            const body = document.body;
+            const toggle = document.getElementById('themeToggle');
+
+            body.classList.toggle('dark-mode');
+
+            if (body.classList.contains('dark-mode')) {
+                toggle.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                toggle.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const toggle = document.getElementById('themeToggle');
+
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                toggle.textContent = '☀️';
+            }
+        }
+
         async function fetchWriteups() {
             try {
                 const root = await fetch(`https://api.github.com/repos/${REPO}/contents`);
@@ -620,7 +689,7 @@
             filteredResults.textContent = list.length;
 
             if (list.length === 0) {
-                writeupsGrid.innerHTML = '<p style="text-align:center;color:#8f7a63;grid-column:1/-1;">Henüz writeup bulunmuyor.</p>';
+                writeupsGrid.innerHTML = '<p style="text-align:center;color:var(--text-tertiary);grid-column:1/-1;">Henüz writeup bulunmuyor.</p>';
                 return;
             }
 
@@ -663,6 +732,7 @@
             totalCategories.textContent = new Set(allWriteups.map(w => w.category)).size;
         }
 
+        loadTheme();
         fetchWriteups();
     </script>
 

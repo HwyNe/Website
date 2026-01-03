@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hakkımda | HwyNe</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="cyber-bg">
+        <canvas id="matrix"></canvas>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-wrapper">
+            <a href="index.html" class="logo">
+                <span class="logo-bracket">[</span>
+                <span class="logo-text">HwyNe</span>
+                <span class="logo-bracket">]</span>
+                <span class="logo-dot">.</span>
+                <span class="logo-ext">sh</span>
+            </a>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-item">
+                    <span class="nav-number">01.</span>
+                    <span class="nav-text">Ana Sayfa</span>
+                </a>
+                <a href="about.html" class="nav-item active">
+                    <span class="nav-number">02.</span>
+                    <span class="nav-text">Hakkımda</span>
+                </a>
+                <a href="writeups.html" class="nav-item">
+                    <span class="nav-number">03.</span>
+                    <span class="nav-text">Writeups</span>
+                </a>
+                <a href="ctf.html" class="nav-item">
+                    <span class="nav-number">04.</span>
+                    <span class="nav-text">CTF Journey</span>
+                </a>
+                <a href="bugbounty.html" class="nav-item">
+                    <span class="nav-number">05.</span>
+                    <span class="nav-text">Bug Bounty</span>
+                </a>
+                <a href="skills.html" class="nav-item">
+                    <span class="nav-number">06.</span>
+                    <span class="nav-text">Skills & Tools</span>
+                </a>
+                <a href="projects.html" class="nav-item">
+                    <span class="nav-number">07.</span>
+                    <span class="nav-text">Projects</span>
+                </a>
+                <a href="contact.html" class="nav-item">
+                    <span class="nav-number">08.</span>
+                    <span class="nav-text">İletişim</span>
+                </a>
+            </div>
+            
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="page-title">
+                    <span class="title-bracket">{'</span>
+                    Hakkımda
+                    <span class="title-bracket">'}</span>
+                </h1>
+                <p class="page-subtitle">$ cat /home/HwyNe/story.txt</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <div class="container">
+            <div class="profile-grid">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <span class="avatar-text">HwyNe</span>
+                        </div>
+                        <div class="profile-info">
+                            <h2 class="profile-name">Muhammed Emin Karkın</h2>
+                            <p class="profile-handle">@HwyNe</p>
+                            <div class="profile-badges">
+                                <span class="badge">Bug Hunter</span>
+                                <span class="badge">CTF Player</span>
+                                <span class="badge">9. Sınıf</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-bio">
+                        <p>
+                            Merhaba! Ben Muhammed Emin Karkın, ama siber güvenlik dünyasında <strong>HwyNe</strong> olarak tanınıyorum. 
+                            Web güvenliği ve penetrasyon testleri alanında kendimi geliştirmeye çalışan bir güvenlik araştırmacısıyım.
+                        </p>
+                        <p>
+                            2025 yılında bu yolculuğa başladım ve hedefim profesyonel bir beyaz şapkalı hacker olmak. 
+                            Şu anda 9. sınıf bilişim öğrencisiyim ve 13 kişilik bir siber güvenlik ekibiyle birlikte çalışıyoruz.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <h3 class="card-title">Hızlı İstatistikler</h3>
+                    <div class="stats-list">
+                        <div class="stat-item">
+                            <span class="stat-label">PicoCTF Web Soruları</span>
+                            <span class="stat-value">43</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Ekip Üye Sayısı</span>
+                            <span class="stat-value">11</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Bug Bounty Bulguları</span>
+                            <span class="stat-value">1+</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Writeup Paylaşımları</span>
+                            <span class="stat-value">15+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Timeline -->
+    <section class="journey-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">// 01</span>
+                <span class="title-text">Yolculuk</span>
+            </h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <span class="timeline-date">2025 - Başlangıç</span>
+                            <span class="timeline-badge">🚀</span>
+                        </div>
+                        <h3>Siber Güvenlik Yolculuğuna İlk Adım</h3>
+                        <p>
+                            2025 yılında siber güvenlik dünyasına adım attım. İlk hedefim web uygulama 
+                            güvenliği üzerine sağlam bir temel oluşturmak oldu. Okuldaki bilişim eğitimimin 
+                            yanında kendi kendime öğrenmeye başladım.
+                        </p>
+                        <ul class="timeline-list">
+                            <li>Web güvenliği temelleri</li>
+                            <li>OWASP Top 10 zafiyetleri öğrenme</li>
+                            <li>İlk CTF challengelarımı çözme</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <span class="timeline-date">2025 - Ekip Kurma</span>
+                            <span class="timeline-badge">👥</span>
+                        </div>
+                        <h3>13 Kişilik Siber Güvenlik Ekibi</h3>
+                        <p>
+                            Okulda benzer ilgi alanlarına sahip arkadaşlarımla bir araya gelerek 13 kişilik 
+                            bir siber güvenlik ekibi kurduk. Birlikte CTF yarışmalarına katılıyor, 
+                            soru çözüyor ve birbirimizden öğreniyoruz.
+                        </p>
+                        <ul class="timeline-list">
+                            <li>Ekip çalışması ve iş bölümü</li>
+                            <li>Düzenli toplantılar ve çalışma seansları</li>
+                            <li>Bilgi paylaşımı ve mentörlük</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <span class="timeline-date">2025 - PicoCTF</span>
+                            <span class="timeline-badge">🎯</span>
+                        </div>
+                        <h3>43 Web Sorusu Çözümü</h3>
+                        <p>
+                            PicoCTF platformunda web exploitation kategorisinde 43 soru çözdüm. 
+                            Her soru, farklı bir güvenlik zafiyeti ve exploitasyon tekniği öğrenmemi sağladı.
+                        </p>
+                        <ul class="timeline-list">
+                            <li>SQL Injection teknikleri</li>
+                            <li>XSS ve CSRF saldırıları</li>
+                            <li>Authentication bypass metodları</li>
+                            <li>Path traversal ve LFI/RFI</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <span class="timeline-date">2025 - Bug Bounty</span>
+                            <span class="timeline-badge">🐛</span>
+                        </div>
+                        <h3>İlk Bug Bounty Deneyimi</h3>
+                        <p>
+                            BugBounty.com platformunda ilk bulgularımı raporlamaya başladım. 
+                            Her ne kadar ücretli bulgu henüz olmasa da, öğrenme sürecimin önemli bir parçası.
+                        </p>
+                        <ul class="timeline-list">
+                            <li>Gerçek dünya uygulamalarında test</li>
+                            <li>Profesyonel raporlama öğrenme</li>
+                            <li>Bug bounty metodolojisi geliştirme</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <span class="timeline-date">2025 - Öğrenme</span>
+                            <span class="timeline-badge">📚</span>
+                        </div>
+                        <h3>Sürekli Eğitim</h3>
+                        <p>
+                            Cihan Güngör hocamızın Udemy'deki eğitimlerini takip ediyorum. 
+                            Ayrıca ders aralarında aldığı eğitimleri bizle paylaşıyor ve pratik çalışmalar yaptırıyor.
+                        </p>
+                        <ul class="timeline-list">
+                            <li>Udemy eğitim setleri</li>
+                            <li>Okul dersleri ve pratik çalışmalar</li>
+                            <li>Online kaynaklar ve dokümantasyonlar</li>
+                            <li>YouTube ve blog yazıları</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="education-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">// 02</span>
+                <span class="title-text">Eğitim & Öğrenme</span>
+            </h2>
+            
+            <div class="education-grid">
+                <div class="edu-card">
+                    <div class="edu-icon">🏫</div>
+                    <h3>Okul Eğitimi</h3>
+                    <p class="edu-title">9. Sınıf Bilişim Öğrencisi</p>
+                    <p class="edu-desc">
+                        Okuldaki bilişim derslerinde temel programlama, ağ güvenliği ve sistem yönetimi konularında 
+                        eğitim alıyorum. Cihan Güngör hocamızın rehberliğinde siber güvenlik çalışmaları yapıyoruz.
+                    </p>
+                </div>
+
+                <div class="edu-card">
+                    <div class="edu-icon">💻</div>
+                    <h3>Online Eğitimler</h3>
+                    <p class="edu-title">Cihan Güngör - Udemy</p>
+                    <p class="edu-desc">
+                        Hocamızın Udemy'de aldığı siber güvenlik eğitimlerini takip ediyorum. 
+                        Web güvenliği, penetrasyon testleri ve ethical hacking konularında detaylı kurslar.
+                    </p>
+                </div>
+
+                <div class="edu-card">
+                    <div class="edu-icon">📚</div>
+                    <h3>Self-Learning</h3>
+                    <p class="edu-title">Kendi Kendine Öğrenme</p>
+                    <p class="edu-desc">
+                        YouTube, blog yazıları, dokümantasyonlar ve hands-on praktikler ile kendimi sürekli geliştiriyorum. 
+                        CTF platformları ve bug bounty çalışmaları en büyük öğretmenlerim.
+                    </p>
+                </div>
+
+                <div class="edu-card">
+                    <div class="edu-icon">👥</div>
+                    <h3>Ekip Çalışması</h3>
+                    <p class="edu-title">13 Kişilik Siber Güvenlik Ekibi</p>
+                    <p class="edu-desc">
+                        Ekip arkadaşlarımızla düzenli olarak bir araya gelip sorular çözüyor, 
+                        bilgi paylaşımı yapıyor ve birlikte öğreniyoruz. Peer learning çok etkili oluyor.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="philosophy-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">// 03</span>
+                <span class="title-text">Felsefem & Motivasyonum</span>
+            </h2>
+            
+            <div class="philosophy-content">
+                <div class="philosophy-box">
+                    <h3>💭 Neden Siber Güvenlik?</h3>
+                    <p>
+                        Dijital dünya her geçen gün daha karmaşık hale geliyor ve güvenlik açıkları 
+                        da beraberinde artıyor. Sistemleri korumak, zafiyetleri keşfetmek ve 
+                        insanların dijital varlıklarını güvende tutmalarına yardımcı olmak bana 
+                        hem heyecan verici hem de anlamlı bir hedef sunuyor.
+                    </p>
+                </div>
+
+                <div class="philosophy-box">
+                    <h3>🎯 Hedeflerim</h3>
+                    <p>
+                        <strong>Kısa Vadede:</strong> Edobounty ve Bayraksende gibi yarışmalarda aktif olarak 
+                        yer almak, daha fazla bug bounty bulgusu raporlamak ve CTF'lerde daha iyi sıralamalar elde etmek.
+                    </p>
+                    <p>
+                        <strong>Uzun Vadede:</strong> Profesyonel bir penetrasyon testi uzmanı olmak, 
+                        güvenlik sertifikaları almak (OSCP, CEH) ve siber güvenlik topluluğuna katkıda bulunmak.
+                    </p>
+                </div>
+
+                <div class="philosophy-box">
+                    <h3>🚀 Nasıl Çalışıyorum?</h3>
+                    <p>
+                        Öncelikle <strong>denemekten korkmuyorum</strong>. Her başarısızlık bir öğrenme fırsatı. 
+                        CTF yarışmalarında birçok kez başarısız oldum, ama her seferinde yeni bir şey öğrendim.
+                    </p>
+                    <p>
+                        <strong>Düzenli ve disiplinli çalışma</strong> en önemli prensibim. Her gün en az 
+                        bir soru çözmeye, bir writeup okumaya veya bir araç öğrenmeye çalışıyorum.
+                    </p>
+                    <p>
+                        <strong>Paylaşmak ve dokümante etmek</strong> öğrenmeyi pekiştiriyor. 
+                        Bu yüzden çözdüğüm soruları ve bulduğum zafiyetleri writeup olarak paylaşıyorum.
+                    </p>
+                </div>
+
+                <blockquote class="quote-box">
+                    <p class="quote-text">
+                        "Güvenlik, bir hedef değil, sürekli bir yolculuktur. 
+                        Her gün yeni bir şey öğreniyor, her başarısızlıktan ders çıkarıyor 
+                        ve daha iyi bir güvenlik araştırmacısı olmak için çalışıyorum."
+                    </p>
+                    <cite>- HwyNe</cite>
+                </blockquote>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2 class="cta-title">Benimle İletişime Geç!</h2>
+                <p class="cta-text">
+                    Siber güvenlik hakkında sohbet etmek, ekip çalışması yapmak veya 
+                    sadece selam vermek için her zaman açığım!
+                </p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary">
+                        <span class="btn-text">İletişim</span>
+                        <span class="btn-arrow">→</span>
+                    </a>
+                    <a href="writeups.html" class="btn btn-secondary">
+                        <span class="btn-text">Writeups'ları İncele</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <span class="logo-bracket">[</span>
+                        <span class="logo-text">HwyNe</span>
+                        <span class="logo-bracket">]</span>
+                    </div>
+                    <p class="footer-desc">
+                        Penetration Tester & Bug Bounty Hunter
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://github.com/HwyNe" target="_blank" class="social-link">GitHub</a>
+                        <a href="https://www.linkedin.com/in/muhammed-emin-karkin-0479112a0/" target="_blank" class="social-link">LinkedIn</a>
+                        <a href="https://www.instagram.com/muhammedeminkarkin/" target="_blank" class="social-link">Instagram</a>
+                    </div>
+                </div>
+                
+                <div class="footer-right">
+                    <div class="footer-links">
+                        <a href="about.html">Hakkımda</a>
+                        <a href="writeups.html">Writeups</a>
+                        <a href="ctf.html">CTF</a>
+                        <a href="contact.html">İletişim</a>
+                    </div>
+                    <div class="footer-copyright">
+                        <p>© 2025 HwyNe. Tüm hakları saklıdır.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

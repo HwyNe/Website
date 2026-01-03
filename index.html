@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HwyNe | Muhammed Emin Karkın - Cyber Security</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="cyber-bg">
+        <canvas id="matrix"></canvas>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-wrapper">
+            <a href="index.html" class="logo">
+                <span class="logo-bracket">[</span>
+                <span class="logo-text">HwyNe</span>
+                <span class="logo-bracket">]</span>
+                <span class="logo-dot">.</span>
+                <span class="logo-ext">sh</span>
+            </a>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-item active">
+                    <span class="nav-number">01.</span>
+                    <span class="nav-text">Ana Sayfa</span>
+                </a>
+                <a href="about.html" class="nav-item">
+                    <span class="nav-number">02.</span>
+                    <span class="nav-text">Hakkımda</span>
+                </a>
+                <a href="writeups.html" class="nav-item">
+                    <span class="nav-number">03.</span>
+                    <span class="nav-text">Writeups</span>
+                </a>
+                <a href="ctf.html" class="nav-item">
+                    <span class="nav-number">04.</span>
+                    <span class="nav-text">CTF Journey</span>
+                </a>
+                <a href="bugbounty.html" class="nav-item">
+                    <span class="nav-number">05.</span>
+                    <span class="nav-text">Bug Bounty</span>
+                </a>
+                <a href="skills.html" class="nav-item">
+                    <span class="nav-number">06.</span>
+                    <span class="nav-text">Skills & Tools</span>
+                </a>
+                <a href="projects.html" class="nav-item">
+                    <span class="nav-number">07.</span>
+                    <span class="nav-text">Projects</span>
+                </a>
+                <a href="contact.html" class="nav-item">
+                    <span class="nav-number">08.</span>
+                    <span class="nav-text">İletişim</span>
+                </a>
+            </div>
+            
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <!-- Terminal Intro -->
+                <div class="terminal-intro">
+                    <div class="terminal-header">
+                        <span class="term-dot red"></span>
+                        <span class="term-dot yellow"></span>
+                        <span class="term-dot green"></span>
+                        <span class="term-title">HwyNe@kali:~$</span>
+                    </div>
+                    <div class="terminal-body">
+                        <p class="term-line">
+                            <span class="term-prompt">┌──(HwyNe㉿kali)-[~]</span>
+                        </p>
+                        <p class="term-line">
+                            <span class="term-prompt">└─$</span> 
+                            <span class="term-cmd">whoami</span>
+                        </p>
+                        <p class="term-output">HwyNe</p>
+                        <p class="term-line">
+                            <span class="term-prompt">└─$</span> 
+                            <span class="term-cmd">cat /etc/motd</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="hero-text">
+                    <div class="status-badge">
+                        <span class="status-dot"></span>
+                        <span>ACTIVE BUG HUNTER</span>
+                    </div>
+                    
+                    <h1 class="glitch-title" data-text="HwyNe">HwyNe</h1>
+                    
+                    <div class="hero-subtitle">
+                        <span class="real-name">aka Muhammed Emin Karkın</span>
+                    </div>
+                    
+                    <div class="typing-container">
+                        <span class="typing-text" id="typingText"></span>
+                        <span class="cursor-blink">█</span>
+                    </div>
+                    
+                    <p class="hero-desc">
+                        Web güvenliği alanında kendimi geliştirmeye odaklanmış bir beyaz şapkalı hacker. 
+                        Motivasyonum siber güvenlik dünyasında iz bırakmak ve sürekli öğrenmek.
+                    </p>
+                    
+                    <div class="hero-buttons">
+                        <a href="writeups.html" class="btn btn-primary">
+                            <span class="btn-icon">📝</span>
+                            <span class="btn-text">Writeups'ları Gör</span>
+                            <span class="btn-arrow">→</span>
+                        </a>
+                        <a href="contact.html" class="btn btn-secondary">
+                            <span class="btn-icon">📧</span>
+                            <span class="btn-text">İletişime Geç</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">🎯</div>
+                        <div class="stat-number" data-target="43">0</div>
+                        <div class="stat-label">PicoCTF Web Sorusu</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🚩</div>
+                        <div class="stat-number" data-target="11">0</div>
+                        <div class="stat-label">Takım Üyeleri</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🐛</div>
+                        <div class="stat-number" data-target="1">0</div>
+                        <div class="stat-label">Bug Bounty Bulgusu</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📚</div>
+                        <div class="stat-number" data-target="15">0</div>
+                        <div class="stat-label">Writeup Paylaşımı</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Info Section -->
+    <section class="quick-info">
+        <div class="container">
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-header">
+                        <span class="info-icon">⚡</span>
+                        <h3>Aktif Çalışmalar</h3>
+                    </div>
+                    <ul class="info-list">
+                        <li>
+                            <span class="list-marker">▹</span>
+                            <span>Bug Bounty platformlarında aktif av</span>
+                        </li>
+                        <li>
+                            <span class="list-marker">▹</span>
+                            <span>CTF yarışmalarına düzenli katılım</span>
+                        </li>
+                        <li>
+                            <span class="list-marker">▹</span>
+                            <span>Writeup paylaşımları ve dokümantasyon</span>
+                        </li>
+                        <li>
+                            <span class="list-marker">▹</span>
+                            <span>Güvenlik araçları geliştirme</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-header">
+                        <span class="info-icon">🎓</span>
+                        <h3>Öğrenme Yolculuğu</h3>
+                    </div>
+                    <ul class="info-list">
+                        <li>
+                            <span class="list-marker">▹</span>
+                            <span>Cihan Güngör Udemy Eğitimleri</span>
+                        </li>
+                        <li>
+                            <span class="list-marker">▹</span>
+                            <span>9. Sınıf Bilişim Öğrencisi</span>
+                        </li>
+                        <li>
+                            <span class="list-marker">▹</span>
+                            <span>13 Kişilik Siber Güvenlik Ekibi</span>
+                        </li>
+                        <li>
+                            <span class="list-marker">▹</span>
+                            <span>Self-learning & Praktik Çalışmalar</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-header">
+                        <span class="info-icon">🎯</span>
+                        <h3>Yakın Hedefler</h3>
+                    </div>
+                    <ul class="info-list">
+                        <li>
+                            <span class="list-marker">▹</span>
+                            <span><strong>Edobounty Yarışması</strong> - Katılım</span>
+                        </li>
+                        <li>
+                            <span class="list-marker">▹</span>
+                            <span><strong>Bayraksende</strong> - 2. Yedek Takım</span>
+                        </li>
+                        <li>
+                            <span class="list-marker">▹</span>
+                            <span>Daha fazla bug bounty bulgusu</span>
+                        </li>
+                        <li>
+                            <span class="list-marker">▹</span>
+                            <span>Profesyonel sertifikalar almak</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="tech-stack">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">// 01</span>
+                <span class="title-text">Tech Stack & Tools</span>
+            </h2>
+            
+            <div class="tech-grid">
+                <div class="tech-category">
+                    <h3 class="category-title">
+                        <span class="category-icon">💻</span>
+                        Programming Languages
+                    </h3>
+                    <div class="tech-items">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">HTML/CSS</span>
+                    </div>
+                </div>
+
+                <div class="tech-category">
+                    <h3 class="category-title">
+                        <span class="category-icon">🔧</span>
+                        Security Tools
+                    </h3>
+                    <div class="tech-items">
+                        <span class="tech-tag">Burp Suite</span>
+                        <span class="tech-tag">ffuf</span>
+                        <span class="tech-tag">Subfinder</span>
+                        <span class="tech-tag">SQLMap</span>
+                        <span class="tech-tag">Nmap</span>
+                        <span class="tech-tag">OWASP ZAP</span>
+                    </div>
+                </div>
+
+                <div class="tech-category">
+                    <h3 class="category-title">
+                        <span class="category-icon">🎯</span>
+                        Focus Areas
+                    </h3>
+                    <div class="tech-items">
+                        <span class="tech-tag">Web Application Security</span>
+                        <span class="tech-tag">SQL Injection</span>
+                        <span class="tech-tag">XSS</span>
+                        <span class="tech-tag">SSRF</span>
+                        <span class="tech-tag">IDOR</span>
+                        <span class="tech-tag">Authentication Bypass</span>
+                    </div>
+                </div>
+
+                <div class="tech-category">
+                    <h3 class="category-title">
+                        <span class="category-icon">🏆</span>
+                        Platforms
+                    </h3>
+                    <div class="tech-items">
+                        <span class="tech-tag">BugBounty.com</span>
+                        <span class="tech-tag">PicoCTF</span>
+                        <span class="tech-tag">GitHub</span>
+                        <span class="tech-tag">Edobounty</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Activity -->
+    <section class="latest-activity">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">// 02</span>
+                <span class="title-text">Son Aktiviteler</span>
+            </h2>
+            
+            <div class="activity-timeline">
+                <div class="activity-item">
+                    <div class="activity-date">[2025-01-03]</div>
+                    <div class="activity-content">
+                        <span class="activity-icon">📝</span>
+                        <span class="activity-text">Yeni writeup paylaşıldı - SQL Injection Techniques</span>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-date">[2025-01-02]</div>
+                    <div class="activity-content">
+                        <span class="activity-icon">🎯</span>
+                        <span class="activity-text">PicoCTF web exploitation challenge çözüldü</span>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-date">[2025-01-01]</div>
+                    <div class="activity-content">
+                        <span class="activity-icon">🐛</span>
+                        <span class="activity-text">Bug bounty platformunda yeni bulgu bildirildi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2 class="cta-title">Beraber Çalışalım!</h2>
+                <p class="cta-text">
+                    Güvenlik projelerinde işbirliği yapmak, CTF takımında yer almak 
+                    veya sadece sohbet etmek için benimle iletişime geçebilirsin.
+                </p>
+                <a href="contact.html" class="btn btn-primary large">
+                    <span class="btn-text">İletişime Geç</span>
+                    <span class="btn-arrow">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <span class="logo-bracket">[</span>
+                        <span class="logo-text">HwyNe</span>
+                        <span class="logo-bracket">]</span>
+                    </div>
+                    <p class="footer-desc">
+                        Penetration Tester & Bug Bounty Hunter
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://github.com/HwyNe" target="_blank" class="social-link">
+                            <span class="social-icon">GitHub</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/muhammed-emin-karkin-0479112a0/" target="_blank" class="social-link">
+                            <span class="social-icon">LinkedIn</span>
+                        </a>
+                        <a href="https://www.instagram.com/muhammedeminkarkin/" target="_blank" class="social-link">
+                            <span class="social-icon">Instagram</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-right">
+                    <div class="footer-links">
+                        <a href="about.html">Hakkımda</a>
+                        <a href="writeups.html">Writeups</a>
+                        <a href="ctf.html">CTF</a>
+                        <a href="contact.html">İletişim</a>
+                    </div>
+                    <div class="footer-copyright">
+                        <p>© 2025 HwyNe. Tüm hakları saklıdır.</p>
+                        <p class="footer-quote">"Güvenlik, bir hedef değil, sürekli bir yolculuktur."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

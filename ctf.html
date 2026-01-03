@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTF Journey | HwyNe</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="cyber-bg">
+        <canvas id="matrix"></canvas>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-wrapper">
+            <a href="index.html" class="logo">
+                <span class="logo-bracket">[</span>
+                <span class="logo-text">HwyNe</span>
+                <span class="logo-bracket">]</span>
+                <span class="logo-dot">.</span>
+                <span class="logo-ext">sh</span>
+            </a>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-item">
+                    <span class="nav-number">01.</span>
+                    <span class="nav-text">Ana Sayfa</span>
+                </a>
+                <a href="about.html" class="nav-item">
+                    <span class="nav-number">02.</span>
+                    <span class="nav-text">Hakkımda</span>
+                </a>
+                <a href="writeups.html" class="nav-item">
+                    <span class="nav-number">03.</span>
+                    <span class="nav-text">Writeups</span>
+                </a>
+                <a href="ctf.html" class="nav-item active">
+                    <span class="nav-number">04.</span>
+                    <span class="nav-text">CTF Journey</span>
+                </a>
+                <a href="bugbounty.html" class="nav-item">
+                    <span class="nav-number">05.</span>
+                    <span class="nav-text">Bug Bounty</span>
+                </a>
+                <a href="skills.html" class="nav-item">
+                    <span class="nav-number">06.</span>
+                    <span class="nav-text">Skills & Tools</span>
+                </a>
+                <a href="projects.html" class="nav-item">
+                    <span class="nav-number">07.</span>
+                    <span class="nav-text">Projects</span>
+                </a>
+                <a href="contact.html" class="nav-item">
+                    <span class="nav-number">08.</span>
+                    <span class="nav-text">İletişim</span>
+                </a>
+            </div>
+            
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="page-title">
+                    <span class="title-bracket">{'</span>
+                    CTF Journey
+                    <span class="title-bracket">'}</span>
+                </h1>
+                <p class="page-subtitle">$ cat /var/log/ctf-history.log</p>
+                <p class="page-desc">
+                    Capture The Flag yolculuğum - Her challenge yeni bir öğrenme fırsatı
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Stats -->
+    <section class="ctf-stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🚩</div>
+                    <div class="stat-number">43</div>
+                    <div class="stat-label">PicoCTF Web Challenges</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-number">11</div>
+                    <div class="stat-label">Takım Üyeleri</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Öğrenme Hırsı</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">// 01</span>
+                <span class="title-text">Takımımız</span>
+            </h2>
+
+            <div class="team-card">
+                <div class="team-header">
+                    <div class="team-logo">
+                        <span class="logo-icon">🛡️</span>
+                    </div>
+                    <div class="team-info">
+                        <h3 class="team-name">Hwyne & Team</h3>
+                        <p class="team-desc">11 kişilik siber güvenlik ekibi</p>
+                    </div>
+                </div>
+
+                <div class="team-content">
+                    <p class="team-story">
+                        Okulda siber güvenliğe meraklı arkadaşlarımızla bir araya gelerek kurduk bu ekibi. 
+                        Şu anda 11 kişiyiz ve düzenli olarak CTF yarışmalarına katılıyor, birlikte sorular 
+                        çözüyoruz. Her birimizin farklı güçlü yönleri var - kimisi web exploitation'da iyi, 
+                        kimisi cryptography'de, kimisi reverse engineering'de.
+                    </p>
+
+                    <div class="team-activities">
+                        <h4>Takım Aktivitelerimiz</h4>
+                        <ul class="activity-list">
+                            <li>
+                                <span class="activity-icon">📅</span>
+                                <span>Haftalık CTF challenge çözüm seansları</span>
+                            </li>
+                            <li>
+                                <span class="activity-icon">🎯</span>
+                                <span>Birlikte yarışmalara katılım</span>
+                            </li>
+                            <li>
+                                <span class="activity-icon">📚</span>
+                                <span>Bilgi paylaşımı ve workshop'lar</span>
+                            </li>
+                            <li>
+                                <span class="activity-icon">💬</span>
+                                <span>Discord üzerinden sürekli iletişim</span>
+                            </li>
+                            <li>
+                                <span class="activity-icon">🏆</span>
+                                <span>Çözülen her sorunun writeup'ını yazma</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PicoCTF Experience -->
+    <section class="picoctf-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">// 02</span>
+                <span class="title-text">PicoCTF Deneyimim</span>
+            </h2>
+
+            <div class="platform-card">
+                <div class="platform-header">
+                    <h3>🎯 PicoCTF</h3>
+                    <span class="platform-badge">43 Web Challenges Solved</span>
+                </div>
+
+                <div class="platform-content">
+                    <p class="platform-desc">
+                        PicoCTF, CTF dünyasına giriş yapmak için harika bir platform. 
+                        Özellikle web exploitation kategorisinde çok şey öğrendim. 
+                        43 web sorusunu çözerken her biri farklı bir teknik ve yaklaşım gerektirdi.
+                    </p>
+
+                    <div class="challenges-learned">
+                        <h4>Öğrendiğim Teknikler</h4>
+                        <div class="technique-grid">
+                            <div class="technique-item">
+                                <span class="tech-icon">💉</span>
+                                <span class="tech-name">SQL Injection</span>
+                                <p class="tech-desc">Blind SQLi, Union-based, Error-based techniques</p>
+                            </div>
+                            <div class="technique-item">
+                                <span class="tech-icon">🎭</span>
+                                <span class="tech-name">XSS (Cross-Site Scripting)</span>
+                                <p class="tech-desc">Reflected, Stored, DOM-based XSS</p>
+                            </div>
+                            <div class="technique-item">
+                                <span class="tech-icon">🔐</span>
+                                <span class="tech-name">Authentication Bypass</span>
+                                <p class="tech-desc">Session hijacking, JWT manipulation</p>
+                            </div>
+                            <div class="technique-item">
+                                <span class="tech-icon">📂</span>
+                                <span class="tech-name">Path Traversal</span>
+                                <p class="tech-desc">LFI/RFI, Directory traversal</p>
+                            </div>
+                            <div class="technique-item">
+                                <span class="tech-icon">🔄</span>
+                                <span class="tech-name">SSRF</span>
+                                <p class="tech-desc">Server-Side Request Forgery</p>
+                            </div>
+                            <div class="technique-item">
+                                <span class="tech-icon">🎪</span>
+                                <span class="tech-name">IDOR</span>
+                                <p class="tech-desc">Insecure Direct Object References</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>En Sevdiğim Challengelar</h4>
+                        <ul class="highlight-list">
+                            <li>
+                                <strong>SQL Injection Advanced:</strong> Blind SQLi ile database dump etmek çok eğlenceliydi
+                            </li>
+                            <li>
+                                <strong>XSS Filter Bypass:</strong> WAF bypass teknikleri öğrenmek harikaydi
+                            </li>
+                            <li>
+                                <strong>JWT Manipulation:</strong> Token'ları manipüle edip admin olmak
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitions -->
+    <section class="competitions-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">// 03</span>
+                <span class="title-text">Yarışmalar</span>
+            </h2>
+
+            <div class="competitions-intro">
+                <p class="intro-text">
+                    Birçok CTF yarışmasına katıldım. Bazıları kolay geldi, bazıları çok zordu. 
+                    Her yarışmada yeni bir şeyler öğrendim ve deneyim kazandım. 
+                    <strong>Önemli olan rank değil, öğrenme süreci.</strong>
+                </p>
+            </div>
+
+            <div class="competition-list">
+                <div class="competition-card">
+                    <div class="comp-header">
+                        <h3>🎯 Düzenli Katıldığım Yarışmalar</h3>
+                    </div>
+                    <ul class="comp-items">
+                        <li>
+                            <span class="comp-bullet">▹</span>
+                            <strong>PicoCTF:</strong> Sürekli aktif, yeni sorular çıktıkça çözmeye çalışıyorum
+                        </li>
+                        <li>
+                            <span class="comp-bullet">▹</span>
+                            <strong>Lokal Yarışmalar:</strong> Okul ve şehir düzeyinde organize edilen CTF'ler
+                        </li>
+                        <li>
+                            <span class="comp-bullet">▹</span>
+                            <strong>Online CTF'ler:</strong> CTFtime'da duyurulan çeşitli yarışmalar
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="competition-card upcoming">
+                    <div class="comp-header">
+                        <h3>🚀 Hedefim: Yaklaşan Yarışmalar</h3>
+                    </div>
+                    <div class="upcoming-comp">
+                        <div class="upcoming-item featured">
+                            <div class="upcoming-icon">🏆</div>
+                            <div class="upcoming-info">
+                                <h4>Edobounty Yarışması</h4>
+                                <p class="upcoming-status">Katılım Planlanıyor</p>
+                                <p class="upcoming-desc">
+                                    Edobounty'de düzenlenecek yarışmaya katılmayı planlıyorum. 
+                                    Ekiple birlikte hazırlık yapıyoruz.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="upcoming-item featured">
+                            <div class="upcoming-icon">⚡</div>
+                            <div class="upcoming-info">
+                                <h4>Bayraksende</h4>
+                                <p class="upcoming-status">2. Yedek Takım</p>
+                                <p class="upcoming-desc">
+                                    Bayraksende yarışmasında 2. yedek takımda yarışma fırsatım var. 
+                                    Bu büyük bir fırsat ve çok heyecanlıyım!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Journey -->
+    <section class="learning-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">// 04</span>
+                <span class="title-text">Öğrenme Süreci</span>
+            </h2>
+
+            <div class="learning-content">
+                <div class="learning-card">
+                    <h3>📈 İlerleme Grafiği</h3>
+                    <p>
+                        Her çözülen challenge, her writeup, her yarışma beni bir adım daha ileriye götürüyor. 
+                        Rank'e bakmıyorum çünkü asıl önemli olan bilgi ve deneyim kazanmak.
+                    </p>
+                    <div class="progress-items">
+                        <div class="progress-item">
+                            <span class="progress-label">Web Exploitation</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <span class="progress-label">Cryptography</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 35%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <span class="progress-label">Reverse Engineering</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 25%"></div>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <span class="progress-label">Forensics</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 40%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="learning-card">
+                    <h3>💡 Öğrendiğim Dersler</h3>
+                    <ul class="lessons-list">
+                        <li>
+                            <strong>Sabır her şeydir:</strong> Bazı challengelar saatler hatta günler alabilir
+                        </li>
+                        <li>
+                            <strong>Ekip çalışması kritik:</strong> Birlikte daha çok şey başarıyoruz
+                        </li>
+                        <li>
+                            <strong>Dokümantasyon önemli:</strong> Her çözümü writeup yaparak pekiştiriyorum
+                        </li>
+                        <li>
+                            <strong>Süreklilik şart:</strong> Her gün biraz pratik yapmak çok etkili
+                        </li>
+                        <li>
+                            <strong>Topluluktan öğren:</strong> Başkalarının writeup'larını okumak çok şey öğretiyor
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2 class="cta-title">CTF'lerde Beraber Çalışalım!</h2>
+                <p class="cta-text">
+                    Ekibimize katılmak veya beraber challenge çözmek istiyorsan benimle iletişime geç!
+                </p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary">
+                        <span class="btn-text">İletişime Geç</span>
+                        <span class="btn-arrow">→</span>
+                    </a>
+                    <a href="writeups.html" class="btn btn-secondary">
+                        <span class="btn-text">Writeups'ları İncele</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <span class="logo-bracket">[</span>
+                        <span class="logo-text">HwyNe</span>
+                        <span class="logo-bracket">]</span>
+                    </div>
+                    <p class="footer-desc">
+                        Penetration Tester & Bug Bounty Hunter
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://github.com/HwyNe" target="_blank" class="social-link">GitHub</a>
+                        <a href="https://www.linkedin.com/in/muhammed-emin-karkin-0479112a0/" target="_blank" class="social-link">LinkedIn</a>
+                        <a href="https://www.instagram.com/muhammedeminkarkin/" target="_blank" class="social-link">Instagram</a>
+                    </div>
+                </div>
+                
+                <div class="footer-right">
+                    <div class="footer-links">
+                        <a href="about.html">Hakkımda</a>
+                        <a href="writeups.html">Writeups</a>
+                        <a href="ctf.html">CTF</a>
+                        <a href="contact.html">İletişim</a>
+                    </div>
+                    <div class="footer-copyright">
+                        <p>© 2025 HwyNe. Tüm hakları saklıdır.</p>
+                        <p class="footer-quote">"Her challenge yeni bir öğrenme fırsatıdır."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

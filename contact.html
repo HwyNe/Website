@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim | HwyNe</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="cyber-bg">
+        <canvas id="matrix"></canvas>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-wrapper">
+            <a href="index.html" class="logo">
+                <span class="logo-bracket">[</span>
+                <span class="logo-text">HwyNe</span>
+                <span class="logo-bracket">]</span>
+                <span class="logo-dot">.</span>
+                <span class="logo-ext">sh</span>
+            </a>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-item">
+                    <span class="nav-number">01.</span>
+                    <span class="nav-text">Ana Sayfa</span>
+                </a>
+                <a href="about.html" class="nav-item">
+                    <span class="nav-number">02.</span>
+                    <span class="nav-text">Hakkımda</span>
+                </a>
+                <a href="writeups.html" class="nav-item">
+                    <span class="nav-number">03.</span>
+                    <span class="nav-text">Writeups</span>
+                </a>
+                <a href="ctf.html" class="nav-item">
+                    <span class="nav-number">04.</span>
+                    <span class="nav-text">CTF Journey</span>
+                </a>
+                <a href="bugbounty.html" class="nav-item">
+                    <span class="nav-number">05.</span>
+                    <span class="nav-text">Bug Bounty</span>
+                </a>
+                <a href="skills.html" class="nav-item">
+                    <span class="nav-number">06.</span>
+                    <span class="nav-text">Skills & Tools</span>
+                </a>
+                <a href="projects.html" class="nav-item">
+                    <span class="nav-number">07.</span>
+                    <span class="nav-text">Projects</span>
+                </a>
+                <a href="contact.html" class="nav-item active">
+                    <span class="nav-number">08.</span>
+                    <span class="nav-text">İletişim</span>
+                </a>
+            </div>
+            
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="page-title">
+                    <span class="title-bracket">{'</span>
+                    İletişim
+                    <span class="title-bracket">'}</span>
+                </h1>
+                <p class="page-subtitle">$ echo "Merhaba!" > /dev/contact</p>
+                <p class="page-desc">
+                    Benimle iletişime geçmek, sohbet etmek veya işbirliği yapmak için
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Hero -->
+    <section class="contact-hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2>Hadi konuşalım!</h2>
+                    <p>
+                        Siber güvenlik, CTF'ler, bug bounty veya herhangi bir konuda 
+                        benimle iletişime geçmekten çekinme. Her zaman yeni insanlarla 
+                        tanışmayı ve bilgi paylaşımı yapmayı seviyorum.
+                    </p>
+                    <div class="hero-features">
+                        <div class="feature-item">
+                            <span class="feature-icon">✅</span>
+                            <span>CTF ekip çalışması</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✅</span>
+                            <span>Bug bounty işbirlikleri</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✅</span>
+                            <span>Siber güvenlik sohbetleri</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✅</span>
+                            <span>Mentorluk ve öğrenme</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Methods -->
+    <section class="contact-methods">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">// 01</span>
+                <span class="title-text">İletişim Kanalları</span>
+            </h2>
+
+            <div class="methods-grid">
+                <a href="mailto:muhammedeminkarkin@gmail.com" class="method-card primary">
+                    <div class="method-icon">📧</div>
+                    <h3>Email</h3>
+                    <p class="method-value">muhammedeminkarkin@gmail.com</p>
+                    <p class="method-desc">
+                        Profesyonel işler, işbirliği teklifleri veya detaylı konuşmalar için en iyi seçenek.
+                    </p>
+                    <div class="method-response">
+                        <span class="response-icon">⚡</span>
+                        <span>Genellikle 24 saat içinde yanıt veriyorum</span>
+                    </div>
+                </a>
+
+                <a href="https://www.linkedin.com/in/muhammed-emin-karkin-0479112a0/" target="_blank" class="method-card">
+                    <div class="method-icon">💼</div>
+                    <h3>LinkedIn</h3>
+                    <p class="method-value">Muhammed Emin Karkın</p>
+                    <p class="method-desc">
+                        Profesyonel networking, kariyer fırsatları ve iş bağlantıları için.
+                    </p>
+                    <div class="method-badge">
+                        <span>Professional Network</span>
+                    </div>
+                </a>
+
+                <a href="https://github.com/HwyNe" target="_blank" class="method-card">
+                    <div class="method-icon">📁</div>
+                    <h3>GitHub</h3>
+                    <p class="method-value">@HwyNe</p>
+                    <p class="method-desc">
+                        Writeup'larımı, projelerimi ve kod çalışmalarımı görmek için.
+                    </p>
+                    <div class="method-badge">
+                        <span>Open Source</span>
+                    </div>
+                </a>
+
+                <a href="https://www.instagram.com/muhammedeminkarkin/" target="_blank" class="method-card">
+                    <div class="method-icon">📸</div>
+                    <h3>Instagram</h3>
+                    <p class="method-value">@muhammedeminkarkin</p>
+                    <p class="method-desc">
+                        Günlük paylaşımlar, hikayeler ve daha rahat sohbetler için.
+                    </p>
+                    <div class="method-badge">
+                        <span>Social Media</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Contact Info -->
+    <section class="quick-info-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">// 02</span>
+                <span class="title-text">Hızlı Bilgiler</span>
+            </h2>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>⏰ Yanıt Süresi</h3>
+                    <p>
+                        Email: 24 saat içinde<br>
+                        Sosyal medya: Birkaç saat içinde<br>
+                        Genellikle hafta içi daha aktifim
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>🌍 Konum</h3>
+                    <p>
+                        Türkiye<br>
+                        Zaman Dilimi: GMT+3<br>
+                        Remote iş ve işbirliklere açığım
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>💬 İletişim Dili</h3>
+                    <p>
+                        Türkçe (Ana dil)<br>
+                        İngilizce (Teknik konularda)<br>
+                        Her iki dilde de konuşabiliriz
+                    </p>
+                </div>
+
+                <div class="info-card">
+                    <h3>🎯 İlgi Alanları</h3>
+                    <p>
+                        Web Security<br>
+                        Bug Bounty<br>
+                        CTF Competitions<br>
+                        Tool Development
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">// 03</span>
+                <span class="title-text">Sıkça Sorulan Sorular</span>
+            </h2>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h3 class="faq-question">❓ Ekibinize nasıl katılabilirim?</h3>
+                    <p class="faq-answer">
+                        Şu an okulumuzdan oluşan kapalı bir ekibiz. Ancak CTF yarışmalarında 
+                        işbirliği yapabiliriz. Benimle iletişime geç, konuşalım!
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">❓ Bug bounty'de işbirliği yapar mısın?</h3>
+                    <p class="faq-answer">
+                        Evet! Özellikle büyük scope'lu programlarda birlikte çalışabiliriz. 
+                        Reward split konusunda adil bir anlaşma yaparız.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">❓ Mentorluk yapıyor musun?</h3>
+                    <p class="faq-answer">
+                        Ben de öğrenme aşamasındayım ama bildiğim konularda yardımcı olmaya 
+                        çalışırım. Sorularını çekinmeden sor!
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">❓ Freelance iş alıyor musun?</h3>
+                    <p class="faq-answer">
+                        Şu an tam zamanlı öğrenciyim ve henüz freelance iş almıyorum. 
+                        Ancak gelecekte bu konuda planlarım var.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">❓ Hangi konularda konuşabiliriz?</h3>
+                    <p class="faq-answer">
+                        Web security, CTF'ler, bug bounty, Python scripting, tool development, 
+                        öğrenme kaynakları - siber güvenlikle ilgili her şey hakkında konuşabiliriz!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="final-cta">
+        <div class="container">
+            <div class="cta-box">
+                <div class="cta-icon">💬</div>
+                <h2>Hadi İletişime Geçelim!</h2>
+                <p>
+                    Bir projen, sorun veya sadece sohbet etmek istersen, 
+                    bana ulaşmaktan çekinme. Her zaman yeni bağlantılara açığım!
+                </p>
+                <div class="cta-buttons">
+                    <a href="mailto:muhammedeminkarkin@gmail.com" class="btn btn-primary large">
+                        <span class="btn-icon">📧</span>
+                        <span class="btn-text">Email Gönder</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/muhammed-emin-karkin-0479112a0/" target="_blank" class="btn btn-secondary large">
+                        <span class="btn-icon">💼</span>
+                        <span class="btn-text">LinkedIn'de Bağlan</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fun Facts -->
+    <section class="fun-facts">
+        <div class="container">
+            <div class="facts-box">
+                <h3>🎮 Bonus: Beni Daha İyi Tanı</h3>
+                <div class="facts-grid">
+                    <div class="fact-item">
+                        <span class="fact-emoji">☕</span>
+                        <p>Kod yazarken kahve içmeyi severim</p>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-emoji">🌙</span>
+                        <p>Gece saatlerinde daha verimli çalışırım</p>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-emoji">🎵</span>
+                        <p>CTF çözerken müzik dinlerim</p>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-emoji">📚</span>
+                        <p>Sürekli yeni şeyler öğrenmeyi severim</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <span class="logo-bracket">[</span>
+                        <span class="logo-text">HwyNe</span>
+                        <span class="logo-bracket">]</span>
+                    </div>
+                    <p class="footer-desc">
+                        Penetration Tester & Bug Bounty Hunter
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://github.com/HwyNe" target="_blank" class="social-link">GitHub</a>
+                        <a href="https://www.linkedin.com/in/muhammed-emin-karkin-0479112a0/" target="_blank" class="social-link">LinkedIn</a>
+                        <a href="https://www.instagram.com/muhammedeminkarkin/" target="_blank" class="social-link">Instagram</a>
+                    </div>
+                </div>
+                
+                <div class="footer-right">
+                    <div class="footer-links">
+                        <a href="about.html">Hakkımda</a>
+                        <a href="writeups.html">Writeups</a>
+                        <a href="ctf.html">CTF</a>
+                        <a href="contact.html">İletişim</a>
+                    </div>
+                    <div class="footer-copyright">
+                        <p>© 2025 HwyNe. Tüm hakları saklıdır.</p>
+                        <p class="footer-quote">"Güvenlik, bir hedef değil, sürekli bir yolculuktur."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

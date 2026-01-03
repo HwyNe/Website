@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | HwyNe</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="cyber-bg">
+        <canvas id="matrix"></canvas>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-wrapper">
+            <a href="index.html" class="logo">
+                <span class="logo-bracket">[</span>
+                <span class="logo-text">HwyNe</span>
+                <span class="logo-bracket">]</span>
+                <span class="logo-dot">.</span>
+                <span class="logo-ext">sh</span>
+            </a>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-item">
+                    <span class="nav-number">01.</span>
+                    <span class="nav-text">Ana Sayfa</span>
+                </a>
+                <a href="about.html" class="nav-item">
+                    <span class="nav-number">02.</span>
+                    <span class="nav-text">Hakkımda</span>
+                </a>
+                <a href="writeups.html" class="nav-item">
+                    <span class="nav-number">03.</span>
+                    <span class="nav-text">Writeups</span>
+                </a>
+                <a href="ctf.html" class="nav-item">
+                    <span class="nav-number">04.</span>
+                    <span class="nav-text">CTF Journey</span>
+                </a>
+                <a href="bugbounty.html" class="nav-item">
+                    <span class="nav-number">05.</span>
+                    <span class="nav-text">Bug Bounty</span>
+                </a>
+                <a href="skills.html" class="nav-item">
+                    <span class="nav-number">06.</span>
+                    <span class="nav-text">Skills & Tools</span>
+                </a>
+                <a href="projects.html" class="nav-item active">
+                    <span class="nav-number">07.</span>
+                    <span class="nav-text">Projects</span>
+                </a>
+                <a href="contact.html" class="nav-item">
+                    <span class="nav-number">08.</span>
+                    <span class="nav-text">İletişim</span>
+                </a>
+            </div>
+            
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="page-title">
+                    <span class="title-bracket">{'</span>
+                    Projects
+                    <span class="title-bracket">'}</span>
+                </h1>
+                <p class="page-subtitle">$ git log --all --oneline</p>
+                <p class="page-desc">
+                    Üzerinde çalıştığım ve gelecekte planladığım projeler
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Stats -->
+    <section class="github-section">
+        <div class="container">
+            <div class="github-card">
+                <div class="github-header">
+                    <h3>📁 GitHub Aktivitesi</h3>
+                    <a href="https://github.com/HwyNe" target="_blank" class="github-link">
+                        <span>github.com/HwyNe</span>
+                        <span class="link-arrow">→</span>
+                    </a>
+                </div>
+                <p class="github-desc">
+                    GitHub'da writeup'larımı paylaşıyor, küçük scriptler yazıyor ve 
+                    öğrendiklerimi dokümante ediyorum. Henüz büyük tool development'a 
+                    başlamadım ama yakında başlayacağım!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Active Projects -->
+    <section class="active-projects">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">// 01</span>
+                <span class="title-text">Aktif Projeler</span>
+            </h2>
+
+            <div class="projects-grid">
+                <div class="project-card featured">
+                    <div class="project-header">
+                        <div class="project-icon">📝</div>
+                        <div class="project-status">
+                            <span class="status-badge active">Active</span>
+                        </div>
+                    </div>
+                    <h3>PicoCTF Writeups</h3>
+                    <p class="project-desc">
+                        PicoCTF'de çözdüğüm web exploitation sorularının detaylı writeup'larını 
+                        GitHub'da paylaşıyorum. Her writeup'ta kullandığım teknikleri, 
+                        karşılaştığım zorlukları ve çözüm adımlarını anlatıyorum.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Writeups</span>
+                        <span class="tag">Web Security</span>
+                        <span class="tag">Documentation</span>
+                    </div>
+                    <div class="project-footer">
+                        <a href="https://github.com/HwyNe/PitoCtf-Writeups" target="_blank" class="project-link">
+                            <span>GitHub'da Gör</span>
+                            <span class="arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">🌐</div>
+                        <div class="project-status">
+                            <span class="status-badge active">Active</span>
+                        </div>
+                    </div>
+                    <h3>Bu Portfolio Sitesi</h3>
+                    <p class="project-desc">
+                        Kendi portfolio sitemi sıfırdan kodladım. Terminal temalı, 
+                        özgün bir tasarım yaptım. Writeup'larımı GitHub'dan otomatik 
+                        olarak çeken bir sistem ekledim.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">HTML/CSS/JS</span>
+                        <span class="tag">Frontend</span>
+                        <span class="tag">Portfolio</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">🎯</div>
+                        <div class="project-status">
+                            <span class="status-badge planning">Planning</span>
+                        </div>
+                    </div>
+                    <h3>Edobounty Hazırlığı</h3>
+                    <p class="project-desc">
+                        Edobounty'de yapılacak yarışma için ekiple birlikte hazırlık yapıyoruz. 
+                        Farklı kategorilerde pratik yapıyor, strateji belirliyoruz.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">CTF</span>
+                        <span class="tag">Team</span>
+                        <span class="tag">Competition</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planned Projects -->
+    <section class="planned-projects">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">// 02</span>
+                <span class="title-text">Planlanan Projeler</span>
+            </h2>
+
+            <div class="planned-grid">
+                <div class="planned-card">
+                    <div class="planned-icon">🔧</div>
+                    <h3>Recon Automation Tool</h3>
+                    <p>
+                        Bug bounty için kendi recon pipeline'ımı oluşturmak istiyorum. 
+                        Subfinder, HTTProbe, ffuf gibi araçları otomatize edecek bir Python script.
+                    </p>
+                    <div class="planned-status">
+                        <span class="status-icon">⏳</span>
+                        <span>Yakında Başlayacağım</span>
+                    </div>
+                </div>
+
+                <div class="planned-card">
+                    <div class="planned-icon">📚</div>
+                    <h3>Security Learning Platform</h3>
+                    <p>
+                        Öğrendiklerimi paylaşmak için küçük bir eğitim platformu yapmayı düşünüyorum. 
+                        Özellikle yeni başlayanlar için temel konuları anlatacağım.
+                    </p>
+                    <div class="planned-status">
+                        <span class="status-icon">💭</span>
+                        <span>Planlama Aşamasında</span>
+                    </div>
+                </div>
+
+                <div class="planned-card">
+                    <div class="planned-icon">🎯</div>
+                    <h3>XSS Payload Generator</h3>
+                    <p>
+                        Farklı WAF'leri bypass edebilecek XSS payload'ları üreten bir tool. 
+                        Encoding, obfuscation ve bypass teknikleri içerecek.
+                    </p>
+                    <div class="planned-status">
+                        <span class="status-icon">💭</span>
+                        <span>Araştırma Yapıyorum</span>
+                    </div>
+                </div>
+
+                <div class="planned-card">
+                    <div class="planned-icon">📱</div>
+                    <h3>CTF Tracker App</h3>
+                    <p>
+                        Ekip olarak çözdüğümüz soruları, skorları ve ilerlemelerimizi 
+                        takip edebileceğimiz basit bir web uygulaması.
+                    </p>
+                    <div class="planned-status">
+                        <span class="status-icon">💭</span>
+                        <span>Fikir Aşamasında</span>
+                    </div>
+                </div>
+
+                <div class="planned-card">
+                    <div class="planned-icon">🔍</div>
+                    <h3>Bug Bounty Methodology</h3>
+                    <p>
+                        Kendi bug bounty metodolojimi ve checklist'lerimi içeren 
+                        detaylı bir GitHub repository'si oluşturmak istiyorum.
+                    </p>
+                    <div class="planned-status">
+                        <span class="status-icon">📝</span>
+                        <span>Notlar Alıyorum</span>
+                    </div>
+                </div>
+
+                <div class="planned-card">
+                    <div class="planned-icon">🤖</div>
+                    <h3>Discord Bot</h3>
+                    <p>
+                        Ekip Discord sunucumuz için CTF duyuruları, writeup paylaşımı 
+                        ve soru çözüm takibi yapacak bir bot.
+                    </p>
+                    <div class="planned-status">
+                        <span class="status-icon">💭</span>
+                        <span>Planlama Aşamasında</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contributions -->
+    <section class="contributions-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-number">// 03</span>
+                <span class="title-text">Topluluk Katkılarım</span>
+            </h2>
+
+            <div class="contributions-content">
+                <div class="contrib-card">
+                    <h3>📝 Writeup Paylaşımları</h3>
+                    <p>
+                        Çözdüğüm her CTF sorusunun writeup'ını yazıp GitHub'da paylaşıyorum. 
+                        Hem kendi öğrenmemi pekiştiriyor hem de başkalarına yardımcı oluyor.
+                    </p>
+                    <div class="contrib-stats">
+                        <span class="stat">15+ Writeup</span>
+                        <span class="separator">|</span>
+                        <span class="stat">Public Repository</span>
+                    </div>
+                </div>
+
+                <div class="contrib-card">
+                    <h3>👥 Ekip Çalışmaları</h3>
+                    <p>
+                        Okuldaki 13 kişilik ekibimizle düzenli olarak bilgi paylaşımı yapıyoruz. 
+                        Birbirimize yeni teknikler öğretiyor, soru çözümleri paylaşıyoruz.
+                    </p>
+                </div>
+
+                <div class="contrib-card">
+                    <h3>🎯 Gelecek Planları</h3>
+                    <p>
+                        İleride blog yazıları yazmayı, YouTube'da video içerikler üretmeyi 
+                        ve açık kaynak güvenlik araçlarına katkıda bulunmayı planlıyorum.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Open Source Philosophy -->
+    <section class="philosophy-section">
+        <div class="container">
+            <div class="philosophy-box">
+                <h2>💭 Açık Kaynak Felsefem</h2>
+                <p>
+                    Güvenlik topluluğu açık kaynak ve bilgi paylaşımı üzerine kurulu. 
+                    Ben de öğrendiklerimi paylaşarak bu topluluğa katkıda bulunmak istiyorum.
+                </p>
+                <blockquote class="philosophy-quote">
+                    "Bilgi paylaştıkça çoğalır. Bugün öğrendiğim bir teknik, yarın başka 
+                    birinin bir zafiyeti bulmasına yardımcı olabilir."
+                </blockquote>
+                <p>
+                    Bu yüzden tüm writeup'larımı, scriptlerimi ve öğrendiklerimi açık kaynak 
+                    olarak paylaşıyorum. Herkesin erişebileceği, kullanabileceği ve katkıda 
+                    bulunabileceği içerikler oluşturmaya çalışıyorum.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2 class="cta-title">Bir Projeyi Birlikte Yapalım!</h2>
+                <p class="cta-text">
+                    Eğer bir proje fikrin varsa veya beraber çalışmak istersen, benimle iletişime geç!
+                </p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary">
+                        <span class="btn-text">İletişime Geç</span>
+                        <span class="btn-arrow">→</span>
+                    </a>
+                    <a href="https://github.com/HwyNe" target="_blank" class="btn btn-secondary">
+                        <span class="btn-text">GitHub Profilim</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <span class="logo-bracket">[</span>
+                        <span class="logo-text">HwyNe</span>
+                        <span class="logo-bracket">]</span>
+                    </div>
+                    <p class="footer-desc">
+                        Penetration Tester & Bug Bounty Hunter
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://github.com/HwyNe" target="_blank" class="social-link">GitHub</a>
+                        <a href="https://www.linkedin.com/in/muhammed-emin-karkin-0479112a0/" target="_blank" class="social-link">LinkedIn</a>
+                        <a href="https://www.instagram.com/muhammedeminkarkin/" target="_blank" class="social-link">Instagram</a>
+                    </div>
+                </div>
+                
+                <div class="footer-right">
+                    <div class="footer-links">
+                        <a href="about.html">Hakkımda</a>
+                        <a href="writeups.html">Writeups</a>
+                        <a href="ctf.html">CTF</a>
+                        <a href="contact.html">İletişim</a>
+                    </div>
+                    <div class="footer-copyright">
+                        <p>© 2025 HwyNe. Tüm hakları saklıdır.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

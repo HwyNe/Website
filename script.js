@@ -1,46 +1,3 @@
-// ===== MATRIX RAIN ANIMATION =====
-const canvas = document.getElementById('matrix');
-if (canvas) {
-    const ctx = canvas.getContext('2d');
-    
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    
-    const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    const drops = [];
-    
-    for (let x = 0; x < columns; x++) {
-        drops[x] = 1;
-    }
-    
-    function drawMatrix() {
-        ctx.fillStyle = 'rgba(5, 8, 16, 0.05)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        ctx.fillStyle = '#00ff41';
-        ctx.font = fontSize + 'px monospace';
-        
-        for (let i = 0; i < drops.length; i++) {
-            const text = matrix[Math.floor(Math.random() * matrix.length)];
-            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-            
-            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                drops[i] = 0;
-            }
-            drops[i]++;
-        }
-    }
-    
-    setInterval(drawMatrix, 35);
-    
-    window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    });
-}
-
 // ===== TYPING EFFECT =====
 const typingElement = document.getElementById('typingText');
 if (typingElement) {
@@ -51,15 +8,15 @@ if (typingElement) {
         'Web Security Enthusiast',
         'Security Researcher'
     ];
-    
+
     let textIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
     let typingSpeed = 100;
-    
+
     function type() {
         const currentText = texts[textIndex];
-        
+
         if (isDeleting) {
             typingElement.textContent = currentText.substring(0, charIndex - 1);
             charIndex--;
@@ -69,7 +26,7 @@ if (typingElement) {
             charIndex++;
             typingSpeed = 100;
         }
-        
+
         if (!isDeleting && charIndex === currentText.length) {
             typingSpeed = 2000;
             isDeleting = true;
@@ -78,10 +35,10 @@ if (typingElement) {
             textIndex = (textIndex + 1) % texts.length;
             typingSpeed = 500;
         }
-        
+
         setTimeout(type, typingSpeed);
     }
-    
+
     type();
 }
 
@@ -93,7 +50,7 @@ if (navToggle && navMenu) {
     navToggle.addEventListener('click', () => {
         navMenu.classList.toggle('active');
     });
-    
+
     // Close menu when clicking on a link
     const navLinks = navMenu.querySelectorAll('.nav-item');
     navLinks.forEach(link => {
@@ -105,7 +62,7 @@ if (navToggle && navMenu) {
 
 // ===== SMOOTH SCROLL =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+    anchor.addEventListener('click', function(e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
@@ -125,12 +82,12 @@ if (counters.length > 0) {
         threshold: 0.5,
         rootMargin: '0px'
     };
-    
+
     const animateCounter = (counter) => {
         const target = parseInt(counter.getAttribute('data-target'));
         let current = 0;
         const increment = target / 50;
-        
+
         const updateCounter = () => {
             current += increment;
             if (current < target) {
@@ -140,10 +97,10 @@ if (counters.length > 0) {
                 counter.textContent = target;
             }
         };
-        
+
         updateCounter();
     };
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -152,7 +109,7 @@ if (counters.length > 0) {
             }
         });
     }, observerOptions);
-    
+
     counters.forEach(counter => observer.observe(counter));
 }
 
@@ -172,7 +129,7 @@ if (revealElements.length > 0) {
     }, {
         threshold: 0.1
     });
-    
+
     revealElements.forEach(el => revealObserver.observe(el));
 }
 
@@ -183,7 +140,7 @@ glitchElements.forEach(element => {
     element.addEventListener('mouseenter', () => {
         const text = element.textContent;
         let iterations = 0;
-        
+
         const glitchInterval = setInterval(() => {
             element.textContent = text
                 .split('')
@@ -194,9 +151,9 @@ glitchElements.forEach(element => {
                     return String.fromCharCode(33 + Math.floor(Math.random() * 94));
                 })
                 .join('');
-            
-            iterations += 1/3;
-            
+
+            iterations += 1 / 3;
+
             if (iterations >= text.length) {
                 clearInterval(glitchInterval);
                 element.textContent = text;
@@ -233,7 +190,7 @@ interactiveElements.forEach(el => {
         cursorFollower.style.transform = 'scale(1.5)';
         cursorFollower.style.backgroundColor = 'rgba(0, 255, 65, 0.1)';
     });
-    
+
     el.addEventListener('mouseleave', () => {
         cursorFollower.style.transform = 'scale(1)';
         cursorFollower.style.backgroundColor = 'transparent';
@@ -246,13 +203,13 @@ const navbar = document.querySelector('.main-nav');
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
-    
+
     if (currentScroll > 50) {
         navbar.style.boxShadow = '0 4px 20px rgba(0, 255, 65, 0.1)';
     } else {
         navbar.style.boxShadow = 'none';
     }
-    
+
     lastScroll = currentScroll;
 });
 

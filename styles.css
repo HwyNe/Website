@@ -1,4 +1,4 @@
-/* ===== KREM MODERN TEMA ===== */
+/* ===== KREM MODERN PROFESYONEL TEMA ===== */
 
 * {
     margin: 0;
@@ -6,26 +6,22 @@
     box-sizing: border-box;
 }
 
+
+/* ===== THEME ===== */
+
 :root {
-    /* Renkler */
-    --bg-main: #f6f3ee;
+    --bg-main: #f7f4ef;
+    --bg-secondary: #f1ede6;
     --bg-card: #ffffff;
-    --bg-soft: #f0ece5;
-    --text-main: #2b2b2b;
+    --text-main: #2c2c2c;
     --text-secondary: #5f5f5f;
-    --text-muted: #8a8a8a;
-    --accent: #c2a36c;
-    /* yumuşak altın/krem */
-    --border: #e2ddd4;
-    /* Typography */
-    --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    /* Spacing */
-    --sm: 0.75rem;
-    --md: 1.5rem;
-    --lg: 3rem;
-    /* Effects */
-    --radius: 10px;
+    --text-muted: #8b8b8b;
+    --accent: #c4a86a;
+    --border: #e4ded4;
+    --radius-sm: 6px;
+    --radius-md: 10px;
     --transition: 0.25s ease;
+    --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 
@@ -39,9 +35,9 @@ body {
 }
 
 .container {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: auto;
-    padding: 0 var(--md);
+    padding: 0 1.5rem;
 }
 
 
@@ -50,39 +46,40 @@ body {
 .main-nav {
     position: sticky;
     top: 0;
-    background: rgba(246, 243, 238, 0.9);
+    background: rgba(247, 244, 239, 0.95);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border);
-    z-index: 100;
+    z-index: 1000;
 }
 
 .nav-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--sm) var(--md);
+    padding: 1rem 1.5rem;
 }
 
 .logo {
     font-size: 1.4rem;
     font-weight: 600;
-    color: var(--text-main);
     text-decoration: none;
+    color: var(--text-main);
 }
 
 .nav-menu {
     display: flex;
-    gap: var(--md);
+    gap: 2rem;
 }
 
 .nav-item {
     text-decoration: none;
-    color: var(--text-secondary);
     font-size: 0.95rem;
+    color: var(--text-secondary);
     transition: var(--transition);
 }
 
-.nav-item:hover {
+.nav-item:hover,
+.nav-item.active {
     color: var(--accent);
 }
 
@@ -90,33 +87,41 @@ body {
 /* ===== HERO ===== */
 
 .hero {
-    padding: var(--lg) 0;
+    padding: 5rem 0;
 }
 
-.hero h1 {
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
+.glitch-title {
+    font-size: clamp(2.8rem, 6vw, 4rem);
     font-weight: 700;
-    margin-bottom: var(--sm);
+    margin-bottom: 1rem;
 }
 
-.hero p {
-    max-width: 600px;
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+
+.hero-desc {
+    max-width: 650px;
+    margin-top: 1.5rem;
     color: var(--text-secondary);
 }
 
 
-/* ===== BUTTON ===== */
+/* ===== BUTTONS ===== */
 
 .btn {
-    display: inline-block;
-    padding: 0.8rem 1.6rem;
-    border-radius: var(--radius);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.8rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--accent);
+    background: transparent;
+    color: var(--accent);
     text-decoration: none;
     font-size: 0.95rem;
     transition: var(--transition);
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    background: transparent;
 }
 
 .btn:hover {
@@ -124,70 +129,129 @@ body {
     color: #fff;
 }
 
+.btn-primary {
+    background: var(--accent);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+}
+
 
 /* ===== CARDS ===== */
 
-.card {
+.stat-card,
+.info-card,
+.tech-category,
+.writeup-card,
+.activity-item {
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: var(--md);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
     transition: var(--transition);
 }
 
-.card:hover {
-    transform: translateY(-3px);
+.stat-card:hover,
+.info-card:hover,
+.tech-category:hover,
+.writeup-card:hover {
+    transform: translateY(-4px);
 }
 
 
 /* ===== GRID ===== */
 
-.grid {
+.stats-grid,
+.info-grid,
+.writeups-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--md);
+    gap: 1.5rem;
 }
 
 
-/* ===== SECTION ===== */
-
-section {
-    padding: var(--lg) 0;
-}
+/* ===== TITLES ===== */
 
 .section-title {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     font-weight: 600;
-    margin-bottom: var(--md);
+    margin-bottom: 2rem;
+}
+
+
+/* ===== TAGS ===== */
+
+.tech-tag,
+.category-badge {
+    display: inline-block;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+
+/* ===== SEARCH ===== */
+
+.search-input {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+
+/* ===== ARTICLE ===== */
+
+.detail-article {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 2.5rem;
+}
+
+.article-title {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+}
+
+.article-content {
+    color: var(--text-secondary);
 }
 
 
 /* ===== FOOTER ===== */
 
-footer {
+.main-footer {
+    margin-top: 4rem;
+    padding: 3rem 0 2rem;
     border-top: 1px solid var(--border);
-    padding: var(--md) 0;
-    text-align: center;
-    font-size: 0.9rem;
+    background: var(--bg-secondary);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+.footer-desc {
+    color: var(--text-secondary);
+}
+
+.footer-copyright {
+    text-align: right;
+    font-size: 0.85rem;
     color: var(--text-muted);
-}
-
-
-/* ===== INPUT ===== */
-
-input,
-textarea {
-    width: 100%;
-    padding: 0.9rem 1rem;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    font-family: var(--font-main);
-}
-
-input:focus,
-textarea:focus {
-    outline: none;
-    border-color: var(--accent);
 }
 
 
@@ -196,5 +260,12 @@ textarea:focus {
 @media (max-width: 768px) {
     .nav-menu {
         display: none;
+    }
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .footer-copyright {
+        text-align: center;
     }
 }

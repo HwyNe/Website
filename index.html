@@ -3,400 +3,578 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HwyNe | Muhammed Emin Karkın - Cyber Security</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>HwyNe - Siber Güvenlik & Web Security Blog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-bottom: 2px solid #00ff41;
+            padding: 2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 255, 65, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #00ff41;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+
+        .tagline {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        nav a {
+            color: #00ff41;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.8);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            padding: 4rem 0;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #888;
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            color: #00ff41;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .about-section {
+            background: #1a1a1a;
+            padding: 3rem 0;
+            margin: 3rem 0;
+            border-radius: 10px;
+            border: 1px solid #333;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            color: #00ff41;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            color: #ccc;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .skill-tag {
+            background: #2d2d2d;
+            color: #00ff41;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            border: 1px solid #00ff41;
+            font-size: 0.9rem;
+        }
+
+        .info-cards {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background: #0a0a0a;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .info-card h4 {
+            color: #00ff41;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .info-card p {
+            color: #888;
+            font-size: 0.95rem;
+        }
+
+        .categories {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 3rem 0;
+        }
+
+        .category-btn {
+            background: #1a1a1a;
+            color: #00ff41;
+            border: 1px solid #00ff41;
+            padding: 0.6rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background: #00ff41;
+            color: #0a0a0a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 255, 65, 0.3);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .blog-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff41;
+            box-shadow: 0 8px 30px rgba(0, 255, 65, 0.2);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #00ff41;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-category {
+            display: inline-block;
+            background: #00ff41;
+            color: #0a0a0a;
+            padding: 0.3rem 0.8rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .blog-title {
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 0.8rem;
+        }
+
+        .blog-excerpt {
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .read-more {
+            color: #00ff41;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .read-more:hover {
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.8);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 4rem 0;
+            color: #888;
+        }
+
+        .loading h3 {
+            font-size: 1.5rem;
+            color: #00ff41;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background: #1a1a1a;
+            border-top: 2px solid #00ff41;
+            padding: 3rem 0;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            color: #00ff41;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+            text-shadow: 0 0 15px rgba(0, 255, 65, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav a {
+                margin: 0 1rem;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats {
+                gap: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Animated Background -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1>HwyNe Security Blog</h1>
+                    <div class="tagline">Web Security | Bug Bounty | CTF Player</div>
+                </div>
+                <nav>
+                    <a href="#home">Ana Sayfa</a>
+                    <a href="#about">Hakkımda</a>
+                    <a href="#blog">Blog</a>
+                    <a href="#contact">İletişim</a>
+                </nav>
+            </div>
+        </div>
+    </header>
 
-    
-    <!-- Navigation -->
-    <nav class="main-nav">
-        <div class="nav-wrapper">
-            <a href="index.html" class="logo">
-                <span class="logo-bracket">[</span>
-                <span class="logo-text">HwyNe</span>
-                <span class="logo-bracket">]</span>
-                <span class="logo-dot">.</span>
-                <span class="logo-ext">sh</span>
-            </a>
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>Muhammed Emin Karkın</h2>
+            <p>Pendik İTO Ticaret Mesleki ve Teknik Anadolu Lisesi - Bilişim Bölümü 9. Sınıf</p>
+            <p>Web güvenliği araştırmaları, bug bounty hunting ve CTF çözümlerine odaklanıyorum.</p>
             
-            <div class="nav-menu" id="navMenu">
-                <a href="index.html" class="nav-item active">
-                    <span class="nav-number">01.</span>
-                    <span class="nav-text">Ana Sayfa</span>
-                </a>
-                <a href="about.html" class="nav-item">
-                    <span class="nav-number">02.</span>
-                    <span class="nav-text">Hakkımda</span>
-                </a>
-                <a href="writeups.html" class="nav-item">
-                    <span class="nav-number">03.</span>
-                    <span class="nav-text">Writeups</span>
-                </a>
-                <a href="ctf.html" class="nav-item">
-                    <span class="nav-number">04.</span>
-                    <span class="nav-text">CTF Journey</span>
-                </a>
-                <a href="bugbounty.html" class="nav-item">
-                    <span class="nav-number">05.</span>
-                    <span class="nav-text">Bug Bounty</span>
-                </a>
-                <a href="skills.html" class="nav-item">
-                    <span class="nav-number">06.</span>
-                    <span class="nav-text">Skills & Tools</span>
-                </a>
-                <a href="projects.html" class="nav-item">
-                    <span class="nav-number">07.</span>
-                    <span class="nav-text">Projects</span>
-                </a>
-                <a href="contact.html" class="nav-item">
-                    <span class="nav-number">08.</span>
-                    <span class="nav-text">İletişim</span>
-                </a>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">43+</div>
+                    <div class="stat-label">PicoCTF Web Challenges</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2-3</div>
+                    <div class="stat-label">Firma Bilgilendirmeleri</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="writeupCount">0</div>
+                    <div class="stat-label">CTF Writeups</div>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <section class="about-section" id="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Hakkımda</h3>
+                        <p>Merhaba! Ben Muhammed Emin Karkın, Pendik İTO Ticaret Mesleki ve Teknik Anadolu Lisesi Bilişim bölümü 9. sınıf öğrencisiyim.</p>
+                        <p>Siber güvenlik alanında özellikle web güvenliği ve network üzerine yoğunlaşıyorum. BugCrowd ve HackerOne platformlarında aktif olarak bug bounty çalışmaları yapıyorum.</p>
+                        <p>PicoCTF'de 43'ten fazla web güvenliği challenge'ını çözerek pratik becerilerimi geliştiriyorum. Farklı firmalardan güvenlik açığı bilgilendirmeleri ile deneyim kazanmaya devam ediyorum.</p>
+                        
+                        <div class="skills">
+                            <span class="skill-tag">Web Security</span>
+                            <span class="skill-tag">Network Security</span>
+                            <span class="skill-tag">Bug Bounty</span>
+                            <span class="skill-tag">CTF Player</span>
+                            <span class="skill-tag">PicoCTF</span>
+                        </div>
+                    </div>
+
+                    <div class="info-cards">
+                        <div class="info-card">
+                            <h4>🎯 Bug Bounty Platformları</h4>
+                            <p>BugCrowd (Ana Platform)<br>HackerOne</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>🚩 CTF Deneyimi</h4>
+                            <p>PicoCTF - 43+ Web Challenge Çözümü</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>🔍 Odak Alanları</h4>
+                            <p>Web Application Security<br>Network Security<br>Vulnerability Research</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>🏫 Eğitim</h4>
+                            <p>PİTO Edubounty Siber Güvenlik Kulübü Üyesi<br>Pendik İTO - Bilişim 9. Sınıf</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog">
+            <h2 style="text-align: center; color: #00ff41; font-size: 2rem; margin-bottom: 2rem;">CTF Writeups</h2>
             
-            <button class="nav-toggle" id="navToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <!-- Terminal Intro -->
-                <div class="terminal-intro">
-                    <div class="terminal-header">
-                        <span class="term-dot red"></span>
-                        <span class="term-dot yellow"></span>
-                        <span class="term-dot green"></span>
-                        <span class="term-title">HwyNe@kali:~$</span>
-                    </div>
-                    <div class="terminal-body">
-                        <p class="term-line">
-                            <span class="term-prompt">┌──(HwyNe㉿kali)-[~]</span>
-                        </p>
-                        <p class="term-line">
-                            <span class="term-prompt">└─$</span> 
-                            <span class="term-cmd">whoami</span>
-                        </p>
-                        <p class="term-output">HwyNe</p>
-                        <p class="term-line">
-                            <span class="term-prompt">└─$</span> 
-                            <span class="term-cmd">cat /etc/motd</span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="hero-text">
-                    <div class="status-badge">
-                        <span class="status-dot"></span>
-                        <span>ACTIVE BUG HUNTER</span>
-                    </div>
-                    
-                    <h1 class="glitch-title" data-text="HwyNe">HwyNe</h1>
-                    
-                    <div class="hero-subtitle">
-                        <span class="real-name">aka Muhammed Emin Karkın</span>
-                    </div>
-                    
-                    <div class="typing-container">
-                        <span class="typing-text" id="typingText"></span>
-                        <span class="cursor-blink">█</span>
-                    </div>
-                    
-                    <p class="hero-desc">
-                        Web güvenliği alanında kendimi geliştirmeye odaklanmış bir beyaz şapkalı hacker. 
-                        Motivasyonum siber güvenlik dünyasında iz bırakmak ve sürekli öğrenmek.
-                    </p>
-                    
-                    <div class="hero-buttons">
-                        <a href="writeups.html" class="btn btn-primary">
-                            <span class="btn-icon">📝</span>
-                            <span class="btn-text">Writeups'ları Gör</span>
-                            <span class="btn-arrow">→</span>
-                        </a>
-                        <a href="contact.html" class="btn btn-secondary">
-                            <span class="btn-icon">📧</span>
-                            <span class="btn-text">İletişime Geç</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Stats Cards -->
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon">🎯</div>
-                        <div class="stat-number" data-target="43">0</div>
-                        <div class="stat-label">PicoCTF Web Sorusu</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">🚩</div>
-                        <div class="stat-number" data-target="11">0</div>
-                        <div class="stat-label">Takım Üyeleri</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">🐛</div>
-                        <div class="stat-number" data-target="1">0</div>
-                        <div class="stat-label">Bug Bounty Bulgusu</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">📚</div>
-                        <div class="stat-number" data-target="15">0</div>
-                        <div class="stat-label">Writeup Paylaşımı</div>
-                    </div>
-                </div>
+            <div class="categories">
+                <button class="category-btn active" data-category="all">Tümü</button>
             </div>
-        </div>
-    </section>
 
-    <!-- Quick Info Section -->
-    <section class="quick-info">
-        <div class="container">
-            <div class="info-grid">
-                <div class="info-card">
-                    <div class="info-header">
-                        <span class="info-icon">⚡</span>
-                        <h3>Aktif Çalışmalar</h3>
-                    </div>
-                    <ul class="info-list">
-                        <li>
-                            <span class="list-marker">▹</span>
-                            <span>Bug Bounty platformlarında aktif av</span>
-                        </li>
-                        <li>
-                            <span class="list-marker">▹</span>
-                            <span>CTF yarışmalarına düzenli katılım</span>
-                        </li>
-                        <li>
-                            <span class="list-marker">▹</span>
-                            <span>Writeup paylaşımları ve dokümantasyon</span>
-                        </li>
-                        <li>
-                            <span class="list-marker">▹</span>
-                            <span>Güvenlik araçları geliştirme</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="info-card">
-                    <div class="info-header">
-                        <span class="info-icon">🎓</span>
-                        <h3>Öğrenme Yolculuğu</h3>
-                    </div>
-                    <ul class="info-list">
-                        <li>
-                            <span class="list-marker">▹</span>
-                            <span>Cihan Güngör Udemy Eğitimleri</span>
-                        </li>
-                        <li>
-                            <span class="list-marker">▹</span>
-                            <span>9. Sınıf Bilişim Öğrencisi</span>
-                        </li>
-                        <li>
-                            <span class="list-marker">▹</span>
-                            <span>13 Kişilik Siber Güvenlik Ekibi</span>
-                        </li>
-                        <li>
-                            <span class="list-marker">▹</span>
-                            <span>Self-learning & Praktik Çalışmalar</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="info-card">
-                    <div class="info-header">
-                        <span class="info-icon">🎯</span>
-                        <h3>Yakın Hedefler</h3>
-                    </div>
-                    <ul class="info-list">
-                        <li>
-                            <span class="list-marker">▹</span>
-                            <span><strong>Edobounty Yarışması</strong> - Katılım</span>
-                        </li>
-                        <li>
-                            <span class="list-marker">▹</span>
-                            <span><strong>Bayraksende</strong> - 2. Yedek Takım</span>
-                        </li>
-                        <li>
-                            <span class="list-marker">▹</span>
-                            <span>Daha fazla bug bounty bulgusu</span>
-                        </li>
-                        <li>
-                            <span class="list-marker">▹</span>
-                            <span>Profesyonel sertifikalar almak</span>
-                        </li>
-                    </ul>
-                </div>
+            <div class="loading" id="loading">
+                <h3>📡 Writeup'lar Yükleniyor...</h3>
+                <p>GitHub reposundan writeup'lar çekiliyor.</p>
             </div>
-        </div>
-    </section>
 
-    <!-- Tech Stack Section -->
-    <section class="tech-stack">
+            <div class="blog-grid" id="blogGrid" style="display: none;"></div>
+        </section>
+    </main>
+
+    <footer id="contact">
         <div class="container">
-            <h2 class="section-title">
-                <span class="title-number">// 01</span>
-                <span class="title-text">Tech Stack & Tools</span>
-            </h2>
-            
-            <div class="tech-grid">
-                <div class="tech-category">
-                    <h3 class="category-title">
-                        <span class="category-icon">💻</span>
-                        Programming Languages
-                    </h3>
-                    <div class="tech-items">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">HTML/CSS</span>
-                    </div>
-                </div>
-
-                <div class="tech-category">
-                    <h3 class="category-title">
-                        <span class="category-icon">🔧</span>
-                        Security Tools
-                    </h3>
-                    <div class="tech-items">
-                        <span class="tech-tag">Burp Suite</span>
-                        <span class="tech-tag">ffuf</span>
-                        <span class="tech-tag">Subfinder</span>
-                        <span class="tech-tag">SQLMap</span>
-                        <span class="tech-tag">Nmap</span>
-                        <span class="tech-tag">OWASP ZAP</span>
-                    </div>
-                </div>
-
-                <div class="tech-category">
-                    <h3 class="category-title">
-                        <span class="category-icon">🎯</span>
-                        Focus Areas
-                    </h3>
-                    <div class="tech-items">
-                        <span class="tech-tag">Web Application Security</span>
-                        <span class="tech-tag">SQL Injection</span>
-                        <span class="tech-tag">XSS</span>
-                        <span class="tech-tag">SSRF</span>
-                        <span class="tech-tag">IDOR</span>
-                        <span class="tech-tag">Authentication Bypass</span>
-                    </div>
-                </div>
-
-                <div class="tech-category">
-                    <h3 class="category-title">
-                        <span class="category-icon">🏆</span>
-                        Platforms
-                    </h3>
-                    <div class="tech-items">
-                        <span class="tech-tag">BugBounty.com</span>
-                        <span class="tech-tag">PicoCTF</span>
-                        <span class="tech-tag">GitHub</span>
-                        <span class="tech-tag">Edobounty</span>
-                    </div>
-                </div>
+            <h3 style="color: #00ff41; margin-bottom: 1.5rem;">İletişim</h3>
+            <div class="social-links">
+                <a href="https://github.com/HwyNe" target="_blank" title="GitHub">💻</a>
+                <a href="https://www.linkedin.com/in/muhammed-emin-karkin-0479112a0/" target="_blank" title="LinkedIn">💼</a>
+                <a href="mailto:muhammedeminkarkin@gmail.com" title="Email">📧</a>
             </div>
-        </div>
-    </section>
-
-    <!-- Latest Activity -->
-    <section class="latest-activity">
-        <div class="container">
-            <h2 class="section-title">
-                <span class="title-number">// 02</span>
-                <span class="title-text">Son Aktiviteler</span>
-            </h2>
-            
-            <div class="activity-timeline">
-                <div class="activity-item">
-                    <div class="activity-date">[2025-01-03]</div>
-                    <div class="activity-content">
-                        <span class="activity-icon">📝</span>
-                        <span class="activity-text">Yeni writeup paylaşıldı - SQL Injection Techniques</span>
-                    </div>
-                </div>
-                <div class="activity-item">
-                    <div class="activity-date">[2025-01-02]</div>
-                    <div class="activity-content">
-                        <span class="activity-icon">🎯</span>
-                        <span class="activity-text">PicoCTF web exploitation challenge çözüldü</span>
-                    </div>
-                </div>
-                <div class="activity-item">
-                    <div class="activity-date">[2025-01-01]</div>
-                    <div class="activity-content">
-                        <span class="activity-icon">🐛</span>
-                        <span class="activity-text">Bug bounty platformunda yeni bulgu bildirildi</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-box">
-                <h2 class="cta-title">Beraber Çalışalım!</h2>
-                <p class="cta-text">
-                    Güvenlik projelerinde işbirliği yapmak, CTF takımında yer almak 
-                    veya sadece sohbet etmek için benimle iletişime geçebilirsin.
-                </p>
-                <a href="contact.html" class="btn btn-primary large">
-                    <span class="btn-text">İletişime Geç</span>
-                    <span class="btn-arrow">→</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-left">
-                    <div class="footer-logo">
-                        <span class="logo-bracket">[</span>
-                        <span class="logo-text">HwyNe</span>
-                        <span class="logo-bracket">]</span>
-                    </div>
-                    <p class="footer-desc">
-                        Penetration Tester & Bug Bounty Hunter
-                    </p>
-                    <div class="footer-social">
-                        <a href="https://github.com/HwyNe" target="_blank" class="social-link">
-                            <span class="social-icon">GitHub</span>
-                        </a>
-                        <a href="https://www.linkedin.com/in/muhammed-emin-karkin-0479112a0/" target="_blank" class="social-link">
-                            <span class="social-icon">LinkedIn</span>
-                        </a>
-                        <a href="https://www.instagram.com/muhammedeminkarkin/" target="_blank" class="social-link">
-                            <span class="social-icon">Instagram</span>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="footer-right">
-                    <div class="footer-links">
-                        <a href="about.html">Hakkımda</a>
-                        <a href="writeups.html">Writeups</a>
-                        <a href="ctf.html">CTF</a>
-                        <a href="contact.html">İletişim</a>
-                    </div>
-                    <div class="footer-copyright">
-                        <p>© 2025 HwyNe. Tüm hakları saklıdır.</p>
-                        <p class="footer-quote">"Güvenlik, bir hedef değil, sürekli bir yolculuktur."</p>
-                    </div>
-                </div>
-            </div>
+            <p style="color: #666; margin-top: 1rem;">muhammedeminkarkin@gmail.com</p>
+            <p style="color: #666; margin-top: 2rem;">© 2025 Muhammed Emin Karkın (HwyNe). Tüm hakları saklıdır.</p>
+            <p style="color: #444; font-size: 0.8rem; margin-top: 0.5rem;">PİTO Edubounty Siber Güvenlik Kulübü</p>
+            <p style="color: #333; font-size: 0.75rem; margin-top: 0.5rem;">Bu içerikler sadece eğitim ve araştırma amaçlıdır.</p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        const GITHUB_REPO = 'HwyNe/PitoCtf-Writeups';
+        const GITHUB_API = `https://api.github.com/repos/${GITHUB_REPO}/contents`;
+        
+        const categoryIcons = {
+            'web': '🌐',
+            'reverse': '🔄',
+            'crypto': '🔐',
+            'forensics': '🔍',
+            'pwn': '💣',
+            'misc': '🎯'
+        };
+
+        async function fetchWriteups() {
+            try {
+                const response = await fetch(GITHUB_API);
+                const folders = await response.json();
+                
+                const categoryButtons = document.querySelector('.categories');
+                const blogGrid = document.getElementById('blogGrid');
+                let allWriteups = [];
+                let totalCount = 0;
+
+                for (const folder of folders) {
+                    if (folder.type === 'dir' && folder.name !== '.git') {
+                        const categoryName = folder.name.toLowerCase();
+                        const icon = categoryIcons[categoryName] || '📁';
+                        
+                        const btn = document.createElement('button');
+                        btn.className = 'category-btn';
+                        btn.setAttribute('data-category', categoryName);
+                        btn.textContent = `${icon} ${folder.name}`;
+                        btn.onclick = () => filterPosts(categoryName);
+                        categoryButtons.appendChild(btn);
+
+                        const categoryResponse = await fetch(folder.url);
+                        const files = await categoryResponse.json();
+                        
+                        for (const file of files) {
+                            if (file.type === 'file' && file.name.endsWith('.md')) {
+                                totalCount++;
+                                const writeup = {
+                                    category: categoryName,
+                                    name: file.name.replace('.md', ''),
+                                    url: file.html_url,
+                                    downloadUrl: file.download_url
+                                };
+                                allWriteups.push(writeup);
+                                
+                                const card = createWriteupCard(writeup);
+                                blogGrid.appendChild(card);
+                            }
+                        }
+                    }
+                }
+
+                document.getElementById('writeupCount').textContent = totalCount;
+                document.getElementById('loading').style.display = 'none';
+                blogGrid.style.display = 'grid';
+
+                if (allWriteups.length === 0) {
+                    blogGrid.innerHTML = '<div class="loading"><h3>Henüz writeup eklenmemiş</h3><p>GitHub reposuna writeup eklendiğinde otomatik olarak burada görünecek.</p></div>';
+                }
+
+            } catch (error) {
+                console.error('Writeup yükleme hatası:', error);
+                document.getElementById('loading').innerHTML = '<h3>❌ Yükleme Hatası</h3><p>Writeup\'lar yüklenirken bir hata oluştu.</p>';
+            }
+        }
+
+        function createWriteupCard(writeup) {
+            const card = document.createElement('article');
+            card.className = 'blog-card';
+            card.setAttribute('data-category', writeup.category);
+            
+            const icon = categoryIcons[writeup.category] || '📁';
+            
+            card.innerHTML = `
+                <div class="blog-image">${icon}</div>
+                <div class="blog-content">
+                    <span class="blog-category">${writeup.category.toUpperCase()}</span>
+                    <h3 class="blog-title">${writeup.name}</h3>
+                    <p class="blog-excerpt">CTF challenge çözümü ve detaylı writeup</p>
+                    <div class="blog-meta">
+                        <span>PicoCTF</span>
+                        <a href="${writeup.url}" target="_blank" class="read-more">GitHub'da Aç →</a>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        function filterPosts(category) {
+            const cards = document.querySelectorAll('.blog-card');
+            const buttons = document.querySelectorAll('.category-btn');
+            
+            buttons.forEach(btn => {
+                if (btn.getAttribute('data-category') === category) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchWriteups);
+    </script>
 </body>
 </html>

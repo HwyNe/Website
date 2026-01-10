@@ -470,7 +470,10 @@
             'crypto': '🔐',
             'forensics': '🔍',
             'pwn': '💣',
-            'misc': '🎯'
+            'misc': '🎯',
+            'osint': '🔎',
+            'stego': '🖼️',
+            'general': '📋'
         };
 
         async function fetchWriteups() {
@@ -490,33 +493,28 @@
                         const categoryName = folder.name.toLowerCase();
                         categories.add(categoryName);
 
-                        // Kategori içindeki alt klasörleri (writeup klasörlerini) al
+                        // Kategori içindeki dosyaları (writeup'ları) al
                         const categoryResponse = await fetch(folder.url);
-                        const writeupFolders = await categoryResponse.json();
+                        const files = await categoryResponse.json();
                         
-                        for (const writeupFolder of writeupFolders) {
-                            if (writeupFolder.type === 'dir') {
-                                // Her writeup klasörünün içine bak
-                                const writeupContents = await fetch(writeupFolder.url);
-                                const files = await writeupContents.json();
+                        for (const file of files) {
+                            // Tüm dosyaları al (klasör değilse ve README.md değilse)
+                            if (file.type === 'file' && file.name !== 'README.md') {
+                                totalCount++;
                                 
-                                // README.md var mı kontrol et
-                                const readmeFile = files.find(f => f.name === 'README.md');
+                                // Dosya adından .md uzantısını kaldır (varsa)
+                                const writeupName = file.name.replace(/\.md$/i, '');
                                 
-                                if (readmeFile) {
-                                    totalCount++;
-                                    
-                                    const writeup = {
-                                        category: categoryName,
-                                        name: writeupFolder.name,
-                                        url: readmeFile.html_url,
-                                        downloadUrl: readmeFile.download_url
-                                    };
-                                    allWriteups.push(writeup);
-                                    
-                                    const card = createWriteupCard(writeup);
-                                    blogGrid.appendChild(card);
-                                }
+                                const writeup = {
+                                    category: categoryName,
+                                    name: writeupName,
+                                    url: file.html_url,
+                                    downloadUrl: file.download_url
+                                };
+                                allWriteups.push(writeup);
+                                
+                                const card = createWriteupCard(writeup);
+                                blogGrid.appendChild(card);
                             }
                         }
                     }

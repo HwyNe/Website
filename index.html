@@ -482,39 +482,56 @@
                 const blogGrid = document.getElementById('blogGrid');
                 let allWriteups = [];
                 let totalCount = 0;
+                let categories = new Set();
 
+                // Ana dizindeki klasörleri kategori olarak al
                 for (const folder of folders) {
                     if (folder.type === 'dir' && folder.name !== '.git') {
                         const categoryName = folder.name.toLowerCase();
-                        const icon = categoryIcons[categoryName] || '📁';
-                        
-                        const btn = document.createElement('button');
-                        btn.className = 'category-btn';
-                        btn.setAttribute('data-category', categoryName);
-                        btn.textContent = `${icon} ${folder.name}`;
-                        btn.onclick = () => filterPosts(categoryName);
-                        categoryButtons.appendChild(btn);
+                        categories.add(categoryName);
 
+                        // Kategori içindeki alt klasörleri (writeup klasörlerini) al
                         const categoryResponse = await fetch(folder.url);
-                        const files = await categoryResponse.json();
+                        const writeupFolders = await categoryResponse.json();
                         
-                        for (const file of files) {
-                            if (file.type === 'file' && file.name.endsWith('.md')) {
-                                totalCount++;
-                                const writeup = {
-                                    category: categoryName,
-                                    name: file.name.replace('.md', ''),
-                                    url: file.html_url,
-                                    downloadUrl: file.download_url
-                                };
-                                allWriteups.push(writeup);
+                        for (const writeupFolder of writeupFolders) {
+                            if (writeupFolder.type === 'dir') {
+                                // Her writeup klasörünün içine bak
+                                const writeupContents = await fetch(writeupFolder.url);
+                                const files = await writeupContents.json();
                                 
-                                const card = createWriteupCard(writeup);
-                                blogGrid.appendChild(card);
+                                // README.md var mı kontrol et
+                                const readmeFile = files.find(f => f.name === 'README.md');
+                                
+                                if (readmeFile) {
+                                    totalCount++;
+                                    
+                                    const writeup = {
+                                        category: categoryName,
+                                        name: writeupFolder.name,
+                                        url: readmeFile.html_url,
+                                        downloadUrl: readmeFile.download_url
+                                    };
+                                    allWriteups.push(writeup);
+                                    
+                                    const card = createWriteupCard(writeup);
+                                    blogGrid.appendChild(card);
+                                }
                             }
                         }
                     }
                 }
+
+                // Kategorileri butonlara ekle
+                categories.forEach(cat => {
+                    const icon = categoryIcons[cat] || '📁';
+                    const btn = document.createElement('button');
+                    btn.className = 'category-btn';
+                    btn.setAttribute('data-category', cat);
+                    btn.textContent = `${icon} ${cat.charAt(0).toUpperCase() + cat.slice(1)}`;
+                    btn.onclick = () => filterPosts(cat);
+                    categoryButtons.appendChild(btn);
+                });
 
                 document.getElementById('writeupCount').textContent = totalCount;
                 document.getElementById('loading').style.display = 'none';
@@ -526,7 +543,7 @@
 
             } catch (error) {
                 console.error('Writeup yükleme hatası:', error);
-                document.getElementById('loading').innerHTML = '<h3>❌ Yükleme Hatası</h3><p>Writeup\'lar yüklenirken bir hata oluştu.</p>';
+                document.getElementById('loading').innerHTML = '<h3>❌ Yükleme Hatası</h3><p>Writeup\'lar yüklenirken bir hata oluştu. Konsolu kontrol edin.</p>';
             }
         }
 

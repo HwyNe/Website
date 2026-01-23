@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog & Writeups | HwyNe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Space+Grotesk:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">HWYNE<span class="dot">.</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Ana Sayfa</a></li>
+                <li><a href="about.html" class="nav-link">Hakkımda</a></li>
+                <li><a href="blog.html" class="nav-link active">Blog</a></li>
+                <li><a href="contact.html" class="btn btn-primary">İletişim</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-header" style="margin-top: 60px;">
+                <h2 class="section-title">CTF Writeups</h2>
+                <p class="section-subtitle">Toplam <span id="writeupCount" style="color: var(--secondary)">0</span>
+                    çözüm ve inceleme.</p>
+            </div>
+
+            <div class="categories">
+                <button class="category-btn active" data-category="all">Tümü</button>
+                <!-- Categories will be injected here -->
+            </div>
+
+            <div class="loading" id="loading">
+                <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 2rem; color: var(--secondary);"></i>
+                <h3 style="margin-top: 15px;">Writeup'lar Yüklüyor...</h3>
+            </div>
+
+            <div class="work-grid" id="blogGrid" style="display: none;">
+                <!-- Blog cards injected here -->
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script>
+        // Specific Blog Logic
+        const GITHUB_REPO = 'HwyNe/PitoCtf-Writeups';
+        const GITHUB_API = `https://api.github.com/repos/${GITHUB_REPO}/contents`;
+
+        const categoryIcons = {
+            'web': 'fa-globe',
+            'reverse': 'fa-rotate',
+            'crypto': 'fa-key',
+            'forensics': 'fa-magnifying-glass',
+            'pwn': 'fa-bomb',
+            'misc': 'fa-cube',
+            'osint': 'fa-eye',
+            'stego': 'fa-image',
+            'general': 'fa-clipboard'
+        };
+
+        async function fetchWriteups() {
+            try {
+                const response = await fetch(GITHUB_API);
+                const folders = await response.json();
+
+                const categoryButtons = document.querySelector('.categories');
+                const blogGrid = document.getElementById('blogGrid');
+                let totalCount = 0;
+                let categories = new Set();
+                let allCards = []; // Store cards to sort or filter later if needed
+
+                // Folders in root are categories
+                for (const folder of folders) {
+                    if (folder.type === 'dir' && folder.name !== '.git') {
+                        const categoryName = folder.name.toLowerCase();
+                        categories.add(categoryName);
+
+                        // Fetch files in category
+                        const categoryResponse = await fetch(folder.url);
+                        const files = await categoryResponse.json();
+
+                        for (const file of files) {
+                            if (file.type === 'file' && file.name !== 'README.md') {
+                                totalCount++;
+                                const writeupName = file.name.replace(/\.md$/i, '');
+
+                                const card = createWriteupCard({
+                                    category: categoryName,
+                                    name: writeupName,
+                                    url: file.html_url
+                                });
+                                blogGrid.appendChild(card);
+                            }
+                        }
+                    }
+                }
+
+                // Add Category Buttons
+                categories.forEach(cat => {
+                    const iconClass = categoryIcons[cat] || 'fa-folder';
+                    const btn = document.createElement('button');
+                    btn.className = 'category-btn glass'; // Use glass style for buttons too
+                    btn.setAttribute('data-category', cat);
+                    // btn.innerHTML = `<i class="fa-solid ${iconClass}"></i> ${cat.charAt(0).toUpperCase() + cat.slice(1)}`;
+                    btn.innerHTML = `${cat.charAt(0).toUpperCase() + cat.slice(1)}`;
+                    btn.onclick = () => filterPosts(cat);
+                    categoryButtons.appendChild(btn);
+                });
+
+                document.getElementById('writeupCount').textContent = totalCount;
+                document.getElementById('loading').style.display = 'none';
+                blogGrid.style.display = 'grid';
+
+                if (totalCount === 0) {
+                    blogGrid.innerHTML = '<div class="glass" style="grid-column: 1/-1; text-align: center; padding: 40px;"><h3>Henüz içerik yok.</h3></div>';
+                }
+
+            } catch (error) {
+                console.error('Error fetching writeups:', error);
+                document.getElementById('loading').innerHTML = '<h3 style="color: var(--secondary)">Yükleme Hatası</h3><p>Github API limitine takılmış olabilir.</p>';
+            }
+        }
+
+        function createWriteupCard(writeup) {
+            const card = document.createElement('div');
+            card.className = 'project-card glass-hover-effect';
+            card.setAttribute('data-category', writeup.category);
+
+            // Random gradient for the "Image" part since we don't have real images
+            const gradients = ['color-1', 'color-2', 'color-3'];
+            const randomGradient = gradients[Math.floor(Math.random() * gradients.length)];
+            const iconClass = categoryIcons[writeup.category] || 'fa-folder';
+
+            card.innerHTML = `
+                <a href="${writeup.url}" target="_blank" style="display:block; height:100%;">
+                    <div class="project-image" style="height: 180px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05);">
+                        <div class="placeholder-img ${randomGradient}" style="opacity: 0.2; position:absolute; inset:0;"></div>
+                        <i class="fa-solid ${iconClass}" style="font-size: 3rem; color: var(--secondary); z-index:1;"></i>
+                    </div>
+                    <div class="project-info" style="padding: 0 10px;">
+                        <span class="project-category">${writeup.category}</span>
+                        <h3 class="project-title" style="font-size: 1.4rem;">${writeup.name}</h3>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 10px;">GitHub'da görüntüle <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.8em"></i></p>
+                    </div>
+                </a>
+            `;
+
+            return card;
+        }
+
+        function filterPosts(category) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.category-btn');
+
+            buttons.forEach(btn => {
+                if (btn.getAttribute('data-category') === category) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchWriteups);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HwyNe | Siber Güvenlik & Web Security</title>
+    <meta name="description" content="HwyNe - Web Güvenliği, Bug Bounty ve CTF Çözümleri">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Space+Grotesk:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Custom Cursor (Outline Only) -->
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">HWYNE<span class="dot">.</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link active">Ana Sayfa</a></li>
+                <li><a href="about.html" class="nav-link">Hakkımda</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="contact.html" class="btn btn-primary">İletişim</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <canvas id="hero-canvas"></canvas>
+        <div class="container hero-content">
+            <h1 class="hero-title">
+                <span class="reveal-text">Muhammed Emin</span><br>
+                <span class="reveal-text gradient-text">Karkın</span>
+            </h1>
+            <p class="hero-subtitle reveal-text-delay">
+                Pendik İTO Ticaret Mesleki ve Teknik Anadolu Lisesi - Bilişim Bölümü 9. Sınıf<br>
+                Web Security | Bug Bounty | CTF Player
+            </p>
+
+            <div class="hero-stats reveal-text-delay">
+                <div class="stat-item glass">
+                    <div class="stat-number">43+</div>
+                    <div class="stat-label">PicoCTF Web Challenges</div>
+                </div>
+                <div class="stat-item glass">
+                    <div class="stat-number">2-3</div>
+                    <div class="stat-label">Firma Bilgilendirmeleri</div>
+                </div>
+            </div>
+
+            <div class="hero-buttons reveal-text-delay" style="margin-top: 40px;">
+                <a href="blog.html" class="btn btn-primary">Writeup'ları İncele</a>
+                <a href="about.html" class="btn btn-outline">Hakkımda</a>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

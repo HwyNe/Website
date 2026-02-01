@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog & Writeups | HwyNe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-text">HWYNE</span>
+                <span class="logo-dot">.</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Ana Sayfa</a></li>
+                <li><a href="about.html" class="nav-link">Hakkımda</a></li>
+                <li><a href="blog.html" class="nav-link active">Blog</a></li>
+                <li><a href="contact.html" class="nav-link contact-btn">İletişim</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Blog Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-title">CTF Writeups</h1>
+                <p class="page-subtitle">Toplam <span id="writeupCount" class="accent-text">0</span> çözüm ve inceleme.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Content -->
+    <section class="blog-section">
+        <div class="container">
+            <div class="categories">
+                <button class="category-btn active" data-category="all">Tümü</button>
+            </div>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Writeup'lar yükleniyor...</p>
+            </div>
+
+            <div class="blog-grid" id="blogGrid"></div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script>
+        const GITHUB_REPO = 'HwyNe/PitoCtf-Writeups';
+        const GITHUB_API = `https://api.github.com/repos/${GITHUB_REPO}/contents`;
+
+        const categoryIcons = {
+            'web': 'fa-globe',
+            'reverse': 'fa-rotate',
+            'crypto': 'fa-key',
+            'forensics': 'fa-magnifying-glass',
+            'pwn': 'fa-bomb',
+            'misc': 'fa-cube',
+            'osint': 'fa-eye',
+            'stego': 'fa-image',
+            'general': 'fa-clipboard'
+        };
+
+        async function fetchWriteups() {
+            try {
+                const response = await fetch(GITHUB_API);
+                const folders = await response.json();
+
+                const categoryButtons = document.querySelector('.categories');
+                const blogGrid = document.getElementById('blogGrid');
+                let totalCount = 0;
+                let categories = new Set();
+
+                for (const folder of folders) {
+                    if (folder.type === 'dir' && folder.name !== '.git') {
+                        const categoryName = folder.name.toLowerCase();
+                        categories.add(categoryName);
+
+                        const categoryResponse = await fetch(folder.url);
+                        const files = await categoryResponse.json();
+
+                        for (const file of files) {
+                            if (file.type === 'file' && file.name !== 'README.md') {
+                                totalCount++;
+                                const writeupName = file.name.replace(/\.md$/i, '');
+                                const card = createWriteupCard({
+                                    category: categoryName,
+                                    name: writeupName,
+                                    url: file.html_url
+                                });
+                                blogGrid.appendChild(card);
+                            }
+                        }
+                    }
+                }
+
+                categories.forEach(cat => {
+                    const btn = document.createElement('button');
+                    btn.className = 'category-btn';
+                    btn.setAttribute('data-category', cat);
+                    btn.innerHTML = cat.charAt(0).toUpperCase() + cat.slice(1);
+                    btn.onclick = () => filterPosts(cat);
+                    categoryButtons.appendChild(btn);
+                });
+
+                document.getElementById('writeupCount').textContent = totalCount;
+                document.getElementById('loading').style.display = 'none';
+                blogGrid.style.display = 'grid';
+
+                if (totalCount === 0) {
+                    blogGrid.innerHTML = '<div class="empty-state"><p>Henüz içerik yok.</p></div>';
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('loading').innerHTML = '<div class="error-state"><p>Yükleme hatası. GitHub API limitine takılmış olabilir.</p></div>';
+            }
+        }
+
+        function createWriteupCard(writeup) {
+            const card = document.createElement('div');
+            card.className = 'writeup-card';
+            card.setAttribute('data-category', writeup.category);
+
+            const iconClass = categoryIcons[writeup.category] || 'fa-folder';
+
+            card.innerHTML = `
+                <a href="${writeup.url}" target="_blank">
+                    <div class="card-icon">
+                        <i class="fas ${iconClass}"></i>
+                    </div>
+                    <div class="card-category">${writeup.category}</div>
+                    <h3 class="card-title">${writeup.name}</h3>
+                    <div class="card-link">
+                        GitHub'da görüntüle
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+            `;
+
+            return card;
+        }
+
+        function filterPosts(category) {
+            const cards = document.querySelectorAll('.writeup-card');
+            const buttons = document.querySelectorAll('.category-btn');
+
+            buttons.forEach(btn => {
+                if (btn.getAttribute('data-category') === category) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchWriteups);
+    </script>
+</body>
+</html>

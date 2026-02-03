@@ -8,10 +8,123 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .writeup-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            animation: fadeIn 0.3s;
+        }
+
+        .writeup-content {
+            background-color: #1a1a1a;
+            margin: 2% auto;
+            padding: 0;
+            width: 90%;
+            max-width: 900px;
+            border-radius: 12px;
+            animation: slideDown 0.3s;
+        }
+
+        .writeup-header {
+            padding: 20px 30px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .writeup-header h2 {
+            color: #fff;
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .close-modal {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: #fff;
+        }
+
+        .writeup-body {
+            padding: 30px;
+            max-height: 70vh;
+            overflow-y: auto;
+            background-color: #0d1117;
+        }
+
+        .markdown-body {
+            background-color: transparent !important;
+            color: #c9d1d9 !important;
+        }
+
+        .markdown-body h1,
+        .markdown-body h2,
+        .markdown-body h3 {
+            color: #fff !important;
+            border-bottom-color: #333 !important;
+        }
+
+        .markdown-body pre {
+            background-color: #161b22 !important;
+        }
+
+        .markdown-body code {
+            background-color: #161b22 !important;
+            color: #ff7b72 !important;
+        }
+
+        .markdown-body a {
+            color: #58a6ff !important;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .writeup-card {
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .writeup-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .loading-spinner {
+            text-align: center;
+            padding: 40px;
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo">
@@ -32,7 +145,6 @@
         </div>
     </nav>
 
-    <!-- Blog Hero -->
     <section class="page-hero">
         <div class="container">
             <div class="page-header">
@@ -42,7 +154,6 @@
         </div>
     </section>
 
-    <!-- Blog Content -->
     <section class="blog-section">
         <div class="container">
             <div class="categories">
@@ -58,6 +169,19 @@
         </div>
     </section>
 
+    <div id="writeupModal" class="writeup-modal">
+        <div class="writeup-content">
+            <div class="writeup-header">
+                <h2 id="modalTitle"></h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="writeup-body">
+                <div id="modalBody" class="markdown-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="script.js"></script>
     <script>
         const GITHUB_REPO = 'HwyNe/PitoCtf-Writeups';
@@ -74,6 +198,29 @@
             'stego': 'fa-image',
             'general': 'fa-clipboard'
         };
+
+        const modal = document.getElementById('writeupModal');
+        const closeBtn = document.querySelector('.close-modal');
+
+        closeBtn.onclick = () => modal.style.display = 'none';
+        window.onclick = (e) => {
+            if (e.target === modal) modal.style.display = 'none';
+        };
+
+        async function loadWriteup(downloadUrl, title) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalBody').innerHTML = '<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Yükleniyor...</div>';
+            modal.style.display = 'block';
+
+            try {
+                const response = await fetch(downloadUrl);
+                const markdown = await response.text();
+                const html = marked.parse(markdown);
+                document.getElementById('modalBody').innerHTML = html;
+            } catch (error) {
+                document.getElementById('modalBody').innerHTML = '<p style="color: #ff6b6b;">Writeup yüklenirken hata oluştu.</p>';
+            }
+        }
 
         async function fetchWriteups() {
             try {
@@ -100,7 +247,7 @@
                                 const card = createWriteupCard({
                                     category: categoryName,
                                     name: writeupName,
-                                    url: file.html_url
+                                    downloadUrl: file.download_url
                                 });
                                 blogGrid.appendChild(card);
                             }
@@ -139,18 +286,18 @@
             const iconClass = categoryIcons[writeup.category] || 'fa-folder';
 
             card.innerHTML = `
-                <a href="${writeup.url}" target="_blank">
-                    <div class="card-icon">
-                        <i class="fas ${iconClass}"></i>
-                    </div>
-                    <div class="card-category">${writeup.category}</div>
-                    <h3 class="card-title">${writeup.name}</h3>
-                    <div class="card-link">
-                        GitHub'da görüntüle
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                </a>
+                <div class="card-icon">
+                    <i class="fas ${iconClass}"></i>
+                </div>
+                <div class="card-category">${writeup.category}</div>
+                <h3 class="card-title">${writeup.name}</h3>
+                <div class="card-link">
+                    Writeup'ı Oku
+                    <i class="fas fa-arrow-right"></i>
+                </div>
             `;
+
+            card.onclick = () => loadWriteup(writeup.downloadUrl, writeup.name);
 
             return card;
         }

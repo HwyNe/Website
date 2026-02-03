@@ -6,16 +6,8 @@ Muhammed Emin Karkın'ın kişisel portföy ve siber güvenlik blog sitesi.
 
 - **Ana Sayfa** - Kısa tanıtım ve istatistikler
 - **Hakkımda** - Eğitim, yetenekler ve hedefler
-- **Blog** - CTF writeup'ları (GitHub'dan otomatik çekiliyor)
+- **Blog** - CTF writeup'lar
 - **İletişim** - Email ve sosyal medya bağlantıları
-
-## Teknolojiler
-## Özellikler
-
-- Beyaz minimalist tasarım
-- Smooth animasyonlar
-- Mobil uyumlu
-- GitHub API entegrasyonu (writeup'lar için)
 
 ## Lisans
 

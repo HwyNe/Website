@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HwyNe — Security Researcher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0A;
+    --bg-deep:#070707;
+    --surface:#121212;
+    --surface-2:#161616;
+    --text:#EDEDED;
+    --text-dim:#A1A1AA;
+    --border:#27272A;
+    --accent:#7CFFB2; /* muted phosphor green, cyber-security cue, used sparingly */
+    --accent-dim: rgba(124,255,178,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg-deep);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+    background-image:
+      radial-gradient(circle at 20% 0%, rgba(124,255,178,0.05), transparent 40%),
+      radial-gradient(circle at 80% 20%, rgba(255,255,255,0.03), transparent 35%);
+  }
+  ::selection{background:var(--accent);color:#000;}
+
+  .serif{font-family:'Instrument Serif', serif; font-style:italic;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+
+  .container{max-width:1100px;margin:0 auto;padding:0 32px;}
+
+  /* Scrollbar */
+  ::-webkit-scrollbar{width:8px;}
+  ::-webkit-scrollbar-track{background:var(--bg-deep);}
+  ::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
+
+  /* Fade-up entrance */
+  .fade-up{
+    opacity:0;
+    transform:translateY(24px);
+    animation:fadeUp .9s cubic-bezier(.16,1,.3,1) forwards;
+  }
+  @keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
+
+  /* Scroll reveal */
+  .reveal{
+    opacity:0;
+    transform:translateY(32px);
+    transition:opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+  }
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media (prefers-reduced-motion:reduce){
+    .fade-up,.reveal{animation:none!important;transition:none!important;opacity:1!important;transform:none!important;}
+    .marquee-track{animation:none!important;}
+  }
+
+  a{color:inherit;text-decoration:none;}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    backdrop-filter:blur(14px);
+    background:rgba(7,7,7,0.6);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:20px 32px;max-width:1100px;margin:0 auto;}
+  .logo{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:15px;letter-spacing:0.5px;display:flex;align-items:center;gap:8px;}
+  .logo-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);}
+  .nav-links{display:flex;gap:36px;font-size:13px;color:var(--text-dim);}
+  .nav-links a{position:relative;padding-bottom:4px;transition:color .3s;}
+  .nav-links a::after{
+    content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--accent);
+    transition:width .35s cubic-bezier(.16,1,.3,1);
+  }
+  .nav-links a:hover{color:var(--text);}
+  .nav-links a:hover::after{width:100%;}
+
+  /* HERO */
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;padding-top:100px;}
+  .hero-eyebrow{
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);
+    letter-spacing:2px;text-transform:uppercase;margin-bottom:24px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .hero-eyebrow .line{width:32px;height:1px;background:var(--accent);opacity:.5;}
+  .hero h1{
+    font-size:clamp(44px,7vw,84px);
+    font-weight:400;
+    line-height:1.02;
+    letter-spacing:-1.5px;
+    margin-bottom:20px;
+  }
+  .hero h1 .accent-serif{font-family:'Instrument Serif',serif;font-style:italic;color:var(--text-dim);}
+  .hero-role{
+    font-size:clamp(16px,2vw,20px);
+    color:var(--text-dim);
+    margin-bottom:36px;
+    font-weight:300;
+  }
+  .hero-role .mono{color:var(--accent);}
+  .hero-bio{max-width:640px;color:var(--text-dim);font-size:15.5px;line-height:1.85;margin-bottom:44px;}
+  .hero-bio strong{color:var(--text);font-weight:500;}
+  .hero-meta{
+    display:flex;gap:28px;flex-wrap:wrap;
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-dim);
+  }
+  .hero-meta span{display:flex;align-items:center;gap:8px;}
+  .hero-meta svg{width:14px;height:14px;stroke:var(--accent);opacity:.8;}
+
+  .btn-row{display:flex;gap:16px;margin-top:44px;flex-wrap:wrap;}
+  .btn{
+    font-family:'JetBrains Mono',monospace;font-size:13px;
+    padding:14px 24px;border-radius:2px;border:1px solid var(--border);
+    display:inline-flex;align-items:center;gap:10px;
+    transition:all .35s cubic-bezier(.16,1,.3,1);
+    background:var(--surface);
+  }
+  .btn.primary{background:var(--accent);color:#050505;border-color:var(--accent);font-weight:500;}
+  .btn.primary:hover{box-shadow:0 0 24px rgba(124,255,178,0.35);transform:translateY(-2px);}
+  .btn:not(.primary):hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+  .btn svg{width:14px;height:14px;transition:transform .3s;}
+  .btn:hover svg{transform:translate(3px,-3px);}
+
+  /* SECTION HEADERS */
+  .section{padding:120px 0;border-top:1px solid var(--border);}
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:56px;flex-wrap:wrap;gap:16px;}
+  .section-eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;}
+  .section-title{font-size:clamp(30px,4vw,46px);font-weight:400;letter-spacing:-1px;}
+  .section-count{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-dim);}
+
+  /* STATS GRID */
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
+  .stat-card{
+    background:var(--surface);padding:36px 28px;
+    transition:background .4s, transform .4s cubic-bezier(.16,1,.3,1);
+  }
+  .stat-card:hover{background:var(--surface-2);transform:translateY(-4px);}
+  .stat-num{font-family:'Instrument Serif',serif;font-size:40px;color:var(--text);margin-bottom:10px;}
+  .stat-label{font-size:12.5px;color:var(--text-dim);font-family:'JetBrains Mono',monospace;line-height:1.5;}
+
+  @media (max-width:800px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
+
+  /* MARQUEE */
+  .marquee-wrap{
+    border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+    padding:28px 0;overflow:hidden;position:relative;background:var(--bg);
+  }
+  .marquee-track{display:flex;width:max-content;animation:scroll 32s linear infinite;}
+  .marquee-track span{
+    font-family:'JetBrains Mono',monospace;font-size:15px;color:var(--text-dim);
+    padding:0 28px;white-space:nowrap;display:flex;align-items:center;gap:28px;
+  }
+  .marquee-track span::after{content:'/';color:var(--accent);opacity:.6;}
+  @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  .marquee-wrap:hover .marquee-track{animation-play-state:paused;}
+
+  /* REPORT CARDS */
+  .reports-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);}
+  .report-card{
+    background:var(--surface);padding:32px;
+    transition:background .4s,border-color .4s, transform .4s cubic-bezier(.16,1,.3,1);
+    position:relative;
+  }
+  .report-card:hover{background:var(--surface-2);transform:translateY(-3px);}
+  .report-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;}
+  .report-badge{
+    width:44px;height:44px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;
+    border:1px solid var(--border);background:var(--bg-deep);color:var(--text-dim);
+  }
+  .sev-p4{color:#F0B429;border-color:rgba(240,180,41,0.4);}
+  .sev-p5{color:var(--text-dim);border-color:var(--border);}
+  .report-status{
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;
+    padding:5px 10px;border:1px solid var(--border);color:var(--text-dim);
+  }
+  .report-org{font-size:19px;color:var(--text);margin-bottom:6px;font-weight:400;}
+  .report-plat{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--accent);margin-bottom:16px;display:block;}
+  .report-desc{font-size:13.5px;color:var(--text-dim);line-height:1.75;}
+  .report-date{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim);margin-top:18px;display:block;opacity:.7;}
+
+  @media (max-width:800px){.reports-grid{grid-template-columns:1fr;}}
+
+  /* CTF TIMELINE */
+  .ctf-list{display:flex;flex-direction:column;}
+  .ctf-item{
+    display:grid;grid-template-columns:90px 1fr auto;gap:24px;align-items:center;
+    padding:28px 0;border-bottom:1px solid var(--border);
+    transition:padding-left .35s cubic-bezier(.16,1,.3,1);
+  }
+  .ctf-item:hover{padding-left:12px;}
+  .ctf-rank{font-family:'Instrument Serif',serif;font-style:italic;font-size:32px;color:var(--accent);}
+  .ctf-name{font-size:18px;color:var(--text);margin-bottom:6px;}
+  .ctf-cats{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--text-dim);}
+  .ctf-year{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-dim);text-align:right;}
+
+  /* CERTS */
+  .certs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
+  .cert-card{background:var(--surface);padding:30px 26px;transition:background .4s,transform .4s cubic-bezier(.16,1,.3,1);}
+  .cert-card:hover{background:var(--surface-2);transform:translateY(-4px);}
+  .cert-icon{
+    width:40px;height:40px;border:1px solid var(--accent);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;margin-bottom:22px;color:var(--accent);
+  }
+  .cert-icon svg{width:18px;height:18px;}
+  .cert-name{font-size:15.5px;color:var(--text);line-height:1.4;margin-bottom:14px;min-height:42px;}
+  .cert-meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim);line-height:1.8;}
+  .cert-meta b{color:var(--text-dim);font-weight:500;}
+
+  @media (max-width:800px){.certs-grid{grid-template-columns:1fr;}}
+
+  /* CONTACT */
+  .contact-title{font-size:clamp(36px,6vw,64px);font-weight:400;letter-spacing:-1.5px;margin-bottom:28px;max-width:700px;}
+  .contact-links{display:flex;flex-direction:column;margin-top:56px;}
+  .contact-link{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 0;border-bottom:1px solid var(--border);
+    font-size:20px;transition:padding-left .35s cubic-bezier(.16,1,.3,1), color .35s;
+  }
+  .contact-link:hover{padding-left:14px;color:var(--accent);}
+  .contact-link .mono{font-size:12px;color:var(--text-dim);}
+  .contact-link svg{width:16px;height:16px;transition:transform .3s;opacity:.6;}
+  .contact-link:hover svg{transform:translate(4px,-4px);opacity:1;}
+
+  footer{border-top:1px solid var(--border);padding:32px 0;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--text-dim);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+
+  @media (max-width:700px){
+    .nav-links{display:none;}
+    .hero-meta{flex-direction:column;gap:12px;}
+    .section{padding:80px 0;}
+  }
+
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo"><span class="logo-dot"></span>HwyNe</div>
+    <div class="nav-links">
+      <a href="#stats">Genel Bakış</a>
+      <a href="#reports">Raporlar</a>
+      <a href="#ctf">CTF</a>
+      <a href="#certs">Sertifikalar</a>
+      <a href="#contact">İletişim</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-eyebrow fade-up" style="animation-delay:.05s"><span class="line"></span>Istanbul, TR · 2026</div>
+    <h1 class="fade-up" style="animation-delay:.15s">Muhammed Emin Karkın<br><span class="accent-serif">— takma adım HwyNe.</span></h1>
+    <div class="hero-role fade-up" style="animation-delay:.25s">Security Meraklısı <span class="mono">/</span> CTF Oyuncusu</div>
+    <p class="hero-bio fade-up" style="animation-delay:.35s">
+      Web güvenliği ve bug bounty ile ilgilenen bir lise öğrencisi. <strong>Ödülden çok metodoloji öğrenmeye</strong> ve sistemlerin nasıl çalıştığını anlamaya önem veriyorum. Tesla, Under Armour, 20 Minuten ve Tripadvisor gibi programlara rapor gönderiyor, CTF yarışmalarına katılarak deneyim kazanıyorum.
+    </p>
+    <div class="hero-meta fade-up" style="animation-delay:.45s">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M12 21c-4-4-7-7.5-7-11a7 7 0 1114 0c0 3.5-3 7-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Istanbul, Türkiye</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>Pendik İTO TMTAL · 10. Sınıf</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Bugcrowd · PİTO EduBounty</span>
+    </div>
+    <div class="btn-row fade-up" style="animation-delay:.55s">
+      <a href="#reports" class="btn primary">Raporları Gör <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+      <a href="mailto:muhammedeminkarkin@gmail.com" class="btn">İletişime Geç <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="stats">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-eyebrow">01 — Genel Bakış</div>
+        <div class="section-title">Rakamlarla profil</div>
+      </div>
+    </div>
+    <div class="stats-grid reveal">
+      <div class="stat-card"><div class="stat-num">12+</div><div class="stat-label">Bug Bounty<br>Programı</div></div>
+      <div class="stat-card"><div class="stat-num">12<span style="font-size:20px;color:var(--text-dim)">/78</span></div><div class="stat-label">MebroBot CTF<br>Sıralama / Takım</div></div>
+      <div class="stat-card"><div class="stat-num">P4</div><div class="stat-label">En Yüksek<br>Triaj Seviyesi</div></div>
+      <div class="stat-card"><div class="stat-num">10.</div><div class="stat-label">Sınıf<br>Pendik İTO TMTAL</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marqueeTrack"></div>
+</div>
+
+<section class="section" id="reports">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-eyebrow">02 — Bulgular</div>
+        <div class="section-title">Bug Bounty Raporları</div>
+      </div>
+      <div class="section-count mono">04 kayıt · Bugcrowd</div>
+    </div>
+    <div class="reports-grid reveal">
+
+      <div class="report-card">
+        <div class="report-top">
+          <div class="report-badge sev-p4">P4</div>
+          <div class="report-status">Duplicate</div>
+        </div>
+        <div class="report-org">20 Minuten</div>
+        <span class="report-plat">Bugcrowd · Triaj Edildi</span>
+        <p class="report-desc">P4 olarak triaj edilen bir bulgu iletildi; daha önce bildirildiği için Duplicate statüsüyle kapandı.</p>
+        <span class="report-date">Şubat 2026</span>
+      </div>
+
+      <div class="report-card">
+        <div class="report-top">
+          <div class="report-badge sev-p5">P5</div>
+          <div class="report-status">Informational</div>
+        </div>
+        <div class="report-org">Tripadvisor</div>
+        <span class="report-plat">Bugcrowd · Unrestricted File Upload</span>
+        <p class="report-desc">Dosya yükleme fonksiyonunun yalnızca uzantıya göre doğrulama yaptığı keşfedildi (PHP content). Informational kabul edildi.</p>
+        <span class="report-date">2026</span>
+      </div>
+
+      <div class="report-card">
+        <div class="report-top">
+          <div class="report-badge sev-p5">P5</div>
+          <div class="report-status">Informational</div>
+        </div>
+        <div class="report-org">Under Armour</div>
+        <span class="report-plat">Bugcrowd · Yapılandırma</span>
+        <p class="report-desc">Teknik yapılandırma eksikliği tespit edildi; doğrudan güvenlik riski oluşturmadığı için Informational değerlendirildi.</p>
+        <span class="report-date">Şubat 2026</span>
+      </div>
+
+      <div class="report-card">
+        <div class="report-top">
+          <div class="report-badge sev-p5">P5</div>
+          <div class="report-status">Informational</div>
+        </div>
+        <div class="report-org">Tesla</div>
+        <span class="report-plat">Bugcrowd · Zayıflık Tespiti</span>
+        <p class="report-desc">Sistemin savunma mekanizmalarını analiz etmek adına verimli bir zayıflık tespiti deneyimi.</p>
+        <span class="report-date">Şubat 2026</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="ctf">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-eyebrow">03 — Yarışmalar</div>
+        <div class="section-title">CTF Dereceleri</div>
+      </div>
+    </div>
+    <div class="ctf-list reveal">
+      <div class="ctf-item">
+        <div class="ctf-rank">05</div>
+        <div><div class="ctf-name">İTÜ CTF</div><div class="ctf-cats">Web · Crypto · Reverse · Forensics · OSINT</div></div>
+        <div class="ctf-year">2026</div>
+      </div>
+      <div class="ctf-item">
+        <div class="ctf-rank">12</div>
+        <div><div class="ctf-name">MebroBot CTF <span style="color:var(--text-dim);font-size:13px">/ 78 takım</span></div><div class="ctf-cats">Crypto · Reverse · Web · Forensics · OSINT · Misc · Mobile · Coding</div></div>
+        <div class="ctf-year">2026</div>
+      </div>
+      <div class="ctf-item">
+        <div class="ctf-rank">02–03</div>
+        <div><div class="ctf-name">SKYDAYS CTF</div><div class="ctf-cats">PİTO EduBounty · YTÜ Davutpaşa · 20 saatlik maraton</div></div>
+        <div class="ctf-year">2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="certs">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-eyebrow">04 — Belgeler</div>
+        <div class="section-title">Sertifikalar</div>
+      </div>
+      <div class="section-count mono">BTK Akademi</div>
+    </div>
+    <div class="certs-grid reveal">
+
+      <div class="cert-card">
+        <div class="cert-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.5 7.2 16.9l.9-5.4-3.9-3.8 5.4-.8L12 2z"/></svg></div>
+        <div class="cert-name">Uygulamalı Sızma Testi</div>
+        <div class="cert-meta"><b>Tarih:</b> 26 Nisan 2026<br><b>Kod:</b> Ko9fEnkLa4</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.5 7.2 16.9l.9-5.4-3.9-3.8 5.4-.8L12 2z"/></svg></div>
+        <div class="cert-name">Sıfırdan İleri Seviye Python Programlama</div>
+        <div class="cert-meta"><b>Tarih:</b> 26 Şubat 2026<br><b>Kod:</b> VP1cgW7p6K</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.5 7.2 16.9l.9-5.4-3.9-3.8 5.4-.8L12 2z"/></svg></div>
+        <div class="cert-name">Bilişim Hukuku</div>
+        <div class="cert-meta"><b>Tarih:</b> 03 Nisan 2026<br><b>Kod:</b> 1kZCeIjnXv</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="container">
+    <div class="section-eyebrow reveal">05 — İletişim</div>
+    <h2 class="contact-title reveal">Bir sorun, geri bildirim ya da birlikte öğrenmek istersen <span class="accent-serif" style="color:var(--text-dim)">yazabilirsin.</span></h2>
+    <div class="contact-links reveal">
+      <a class="contact-link" href="mailto:muhammedeminkarkin@gmail.com"><span>E-posta <span class="mono">muhammedeminkarkin@gmail.com</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+      <a class="contact-link" href="https://github.com/HwyNe" target="_blank" rel="noopener"><span>GitHub <span class="mono">@HwyNe</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+      <a class="contact-link" href="https://www.linkedin.com/in/muhammed-emin-karkin-0479112a0" target="_blank" rel="noopener"><span>LinkedIn <span class="mono">muhammed-emin-karkin</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+      <a class="contact-link" href="https://www.instagram.com/muhammedeminkarkin/" target="_blank" rel="noopener"><span>Instagram <span class="mono">@muhammedeminkarkin</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container" style="display:flex;justify-content:space-between;width:100%;flex-wrap:wrap;gap:12px;">
+    <span>© 2026 HwyNe · Muhammed Emin Karkın</span>
+    <span>Istanbul, Türkiye</span>
+  </div>
+</footer>
+
+<script>
+  // Marquee content
+  const topics = ["Web Security","Bug Bounty","CTF Player","Penetration Testing","PİTO EduBounty","Bugcrowd","Ethical Hacking","OSINT","Forensics","Reverse Engineering","Active Directory","Mobile","Crypto"];
+  const track = document.getElementById('marqueeTrack');
+  const full = [...topics, ...topics]; // duplicate for seamless loop
+  track.innerHTML = full.map(t => `<span>${t}</span>`).join('');
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:0.15});
+  revealEls.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>

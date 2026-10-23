@@ -161,11 +161,6 @@ const t=T[lang],i=lang==="tr"?0:1;
 document.documentElement.lang=lang;
 const S=[
 `<section id="hakkimda"><h1 class="big">HwyNe</h1><p class="nm">${t.name}</p><p class="rl">${t.role}</p><pre>${who(t.who)}</pre><div class="about"><h3>${t.ah}</h3><p>${t.about}</p></div></section>`,
-sec("basarilar",t,1,`<div class="tiles">${A.map(a=>`<div class="tile"><b>${a.r}</b><div><h3>${a.n}</h3><p>${a.d[i]}</p><div class="m">${a.tag[i]} · ${a.y}</div></div></div>`).join("")}</div><h4>${t.cert}</h4>${C.map(c=>`<div class="row"><div>${c.n[i]}</div><span>${c.dt[i]}</span><i>${t.kod}: ${c.k}</i></div>`).join("")}`),
-sec("bulgular",t,2,`${R.map(r=>`<div class="row"><div>${r.p}</div><span>${r.st[i]} · ${r.dt[i]}</span><i class="chip">${r.s}</i></div>`).join("")}<p class="note">${t.note}</p>`,t.sp),
-sec("projeler",t,3,`<div class="g">${t.pr.map(p=>p[2]?`<a class="card" href="${p[2]}" target="_blank" rel="noopener noreferrer"><h3>${p[0]}</h3><p>${p[1]}</p></a>`:`<div class="card"><h3>${p[0]}</h3><p>${p[1]}</p><div class="m">${t.soon}</div></div>`).join("")}</div>`),
-sec("iletisim",t,4,`<button class="mail" id="cp">${L.mail}</button><div class="cm" id="cm">${t.cp}</div><div class="soc"><a href="${L.gh}" target="_blank" rel="noopener noreferrer">GitHub</a><a href="${L.li}" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="${L.ig}" target="_blank" rel="noopener noreferrer">Instagram</a></div><footer>© 2026 Muhammed Emin Karkın (HwyNe) · ${t.foot}</footer>`,t.ct)];
-$("#app").innerHTML=`<aside class="rail"><a class="logo" href="#hakkimda">hwyne</a><nav>${IDS.map((d,k)=>`<a href="#${d}" data-s="${d}">// ${t.nav[k]}</a>`).join("")}</nav><button class="lang" id="lg" aria-label="Language">${lang==="tr"?"EN":"TR"}</button></aside><main>${S.join("")}</main>`;
 document.title="HwyNe | Muhammed Emin Karkın";
 $("#lg").onclick=()=>{lang=lang==="tr"?"en":"tr";try{localStorage.setItem("lang",lang)}catch(e){}draw()};
 $("#cp").onclick=()=>{
